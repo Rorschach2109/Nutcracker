@@ -1,12 +1,14 @@
 package com.adrznej.nutcracker.model;
 
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -31,6 +33,9 @@ public class EventPersonModel implements java.io.Serializable {
 	
 	private String nick;
 	private String telephoneNumber;
+
+	@ManyToMany(mappedBy="eventPeople")
+	private Set<EventModel> personEvents;
 	
 	public EventPersonModel() {
 	}
@@ -40,6 +45,7 @@ public class EventPersonModel implements java.io.Serializable {
 		this.surname = surname;
 		this.nick = nick;
 		this.telephoneNumber = telephoneNumber;
+		this.personEvents = null;
 	}
 
 	public int getEventPersonModelId() {
@@ -80,6 +86,14 @@ public class EventPersonModel implements java.io.Serializable {
 
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
+	}
+
+	public Set<EventModel> getPersonEvents() {
+		return personEvents;
+	}
+
+	public void setPersonEvents(Set<EventModel> personEvents) {
+		this.personEvents = personEvents;
 	}
 
 	@Override

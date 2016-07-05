@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,6 +25,11 @@ public class NoteModel implements java.io.Serializable {
 	
 	@Column(nullable=false)
 	private String message;
+	
+	@Column(nullable=false)
+	@ManyToOne
+	@JoinColumn(name="CategoryId")
+	private CategoryModel noteCategory;
 
 	public NoteModel() {
 	}
@@ -47,9 +54,17 @@ public class NoteModel implements java.io.Serializable {
 		this.message = message;
 	}
 
+	public CategoryModel getNoteCategory() {
+		return noteCategory;
+	}
+
+	public void setNoteCategory(CategoryModel noteCategory) {
+		this.noteCategory = noteCategory;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.message);
+		return Objects.hash(this.message, this.noteCategory);
 	}
 
 	@Override
@@ -63,6 +78,7 @@ public class NoteModel implements java.io.Serializable {
 		}
 		
 		NoteModel noteModel = (NoteModel) obj;
-		return this.message.equals(noteModel.message);
+		return this.message.equals(noteModel.message) &&
+				this.noteCategory.equals(noteModel.noteCategory);
 	}
 }

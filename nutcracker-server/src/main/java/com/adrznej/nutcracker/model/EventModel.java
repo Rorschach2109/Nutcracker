@@ -3,11 +3,18 @@ package com.adrznej.nutcracker.model;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -22,33 +29,31 @@ public class EventModel implements java.io.Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int eventModelId;
 
-	@Column(name="EParent", nullable=true)
-	private EventModel eventParent;
-	
-	@Column(name="EPeople", nullable=false)
+	@Column(nullable=false)
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(name="Event_Person",
+			joinColumns={@JoinColumn(name="EventId")},
+			inverseJoinColumns={@JoinColumn(name="PersonId")})
 	private Set<EventPersonModel> eventPeople;
 	
-	@Column(name="EPlace", nullable=false)
+	@Column(nullable=false)
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="EPlaceId")
 	private EventPlaceModel eventPlace;
 
-	@Column(name="EDate", nullable=false)
-	private EventDateModel eventDate;
-	
-	@Column(name="ENote", nullable=false)
+	@Column(nullable=false)
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private NoteModel eventNote;
 	
 	public EventModel() {
 	}
 
-	public EventModel(EventModel eventParent,
-			Set<EventPersonModel> eventPeople, 
+	public EventModel(Set<EventPersonModel> eventPeople, 
 			EventPlaceModel eventPlace, 
-			EventDateModel eventDate,
 			NoteModel eventNote) {
-		this.eventParent = eventParent;
 		this.eventPeople = eventPeople;
 		this.eventPlace = eventPlace;
-		this.eventDate = eventDate;
 		this.eventNote = eventNote;
 	}
 
@@ -58,14 +63,6 @@ public class EventModel implements java.io.Serializable {
 
 	public void setEventModelId(int eventModelId) {
 		this.eventModelId = eventModelId;
-	}
-	
-	public EventModel getEventParent() {
-		return eventParent;
-	}
-	
-	public void setEventParent(EventModel eventParent) {
-		this.eventParent = eventParent;
 	}
 
 	public Set<EventPersonModel> getEventPeople() {
@@ -84,14 +81,6 @@ public class EventModel implements java.io.Serializable {
 		this.eventPlace = eventPlace;
 	}
 
-	public EventDateModel getEventDate() {
-		return eventDate;
-	}
-
-	public void setEventDate(EventDateModel eventDate) {
-		this.eventDate = eventDate;
-	}
-
 	public NoteModel getEventNote() {
 		return eventNote;
 	}
@@ -103,7 +92,6 @@ public class EventModel implements java.io.Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(this.eventPlace,
-				this.eventDate,
 				this.eventNote);
 	}
 
@@ -119,7 +107,6 @@ public class EventModel implements java.io.Serializable {
 		
 		EventModel eventModel = (EventModel) obj;
 		return this.eventPlace.equals(eventModel.eventPlace) &&
-				this.eventDate.equals(eventModel.eventDate) &&
 				this.eventNote.equals(eventModel.eventNote);
 	}
 }
