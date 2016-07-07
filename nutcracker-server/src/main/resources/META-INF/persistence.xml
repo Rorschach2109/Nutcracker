@@ -5,15 +5,16 @@
 <persistence-unit name="nutcracker-unit">
   <provider>org.hibernate.ejb.HibernatePersistence</provider>
   <jta-data-source>java:jboss/datasources/NutCrackerDB</jta-data-source>
+  
   <class>com.adrznej.nutcracker.model.CategoryModel</class>
-  <class>com.adrznej.nutcracker.model.EventModel</class>
-  <class>com.adrznej.nutcracker.model.EventPersonModel</class>
-  <class>com.adrznej.nutcracker.model.EventPlaceModel</class>
+  <class>com.adrznej.nutcracker.model.NoteDateModel</class>
   <class>com.adrznej.nutcracker.model.NoteModel</class>
+  <class>com.adrznej.nutcracker.model.NotePlaceModel</class>
   <class>com.adrznej.nutcracker.model.UserModel</class>
+  <exclude-unlisted-classes>true</exclude-unlisted-classes>
   <properties>
-     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+     <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+     <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
      <property name="hibernate.show_sql" value="true"/>
      <property name="hibernate.hbm2ddl.auto" value="create"/>
    </properties>
