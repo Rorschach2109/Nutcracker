@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="EPlace")
-public class EventPlaceModel implements java.io.Serializable {
+public class NotePlaceModel implements java.io.Serializable {
 
 	@Transient
 	private static final long serialVersionUID = 4964549122116459078L;
@@ -29,10 +29,10 @@ public class EventPlaceModel implements java.io.Serializable {
 	
 	private String address;
 	
-	public EventPlaceModel() {
+	public NotePlaceModel() {
 	}
 
-	public EventPlaceModel(String country, String city, String address) {
+	public NotePlaceModel(String country, String city, String address) {
 		this.country = country;
 		this.city = city;
 		this.address = address;
@@ -79,7 +79,7 @@ public class EventPlaceModel implements java.io.Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (false == obj instanceof EventPlaceModel) {
+		if (false == obj instanceof NotePlaceModel) {
 			return false;
 		}
 		
@@ -87,7 +87,7 @@ public class EventPlaceModel implements java.io.Serializable {
 			return true;
 		}
 		
-		EventPlaceModel eventPlaceModel = (EventPlaceModel) obj;
+		NotePlaceModel eventPlaceModel = (NotePlaceModel) obj;
 		return this.country.equals(eventPlaceModel.country) &&
 				this.city.equals(eventPlaceModel.city);
 	}

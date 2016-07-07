@@ -2,6 +2,7 @@ package com.adrznej.nutcracker.model;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,14 +24,21 @@ public class NoteModel implements java.io.Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int noteModelId;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, columnDefinition="TEXT")
 	private String message;
 	
-	@Column(nullable=false)
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="CategoryId")
 	private CategoryModel noteCategory;
-
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="PlaceId")
+	private NotePlaceModel notePlace;
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="DateId")
+	private NoteDateModel noteDate;
+	
 	public NoteModel() {
 	}
 
@@ -60,6 +68,22 @@ public class NoteModel implements java.io.Serializable {
 
 	public void setNoteCategory(CategoryModel noteCategory) {
 		this.noteCategory = noteCategory;
+	}
+
+	public NotePlaceModel getNotePlace() {
+		return notePlace;
+	}
+
+	public void setNotePlace(NotePlaceModel notePlace) {
+		this.notePlace = notePlace;
+	}
+
+	public NoteDateModel getNoteDate() {
+		return noteDate;
+	}
+
+	public void setNoteDate(NoteDateModel noteDate) {
+		this.noteDate = noteDate;
 	}
 
 	@Override

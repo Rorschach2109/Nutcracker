@@ -4,10 +4,12 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -28,13 +30,12 @@ public class UserModel implements java.io.Serializable {
 	private String userLogin;
 	private String userPassword;
 	
-	@OneToMany(cascade={CascadeType.ALL})
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinColumn(name="UserNoteId")
 	private Set<NoteModel> userNotes;
 	
-	@OneToMany(cascade={CascadeType.ALL})
-	@JoinColumn(name="UserEventId")
-	private Set<EventModel> userEvents;
+	@ManyToMany(cascade=CascadeType.ALL)
+	private Set<CategoryModel> userCategories;
 	
 	public UserModel() {
 	}
@@ -43,7 +44,6 @@ public class UserModel implements java.io.Serializable {
 		this.userLogin = userLogin;
 		this.userPassword = userPassword;
 		this.userNotes = null;
-		this.userEvents = null;
 	}
 
 	public int getUserModelId() {
@@ -78,11 +78,11 @@ public class UserModel implements java.io.Serializable {
 		this.userNotes = userNotes;
 	}
 
-	public Set<EventModel> getUserEvents() {
-		return userEvents;
+	public Set<CategoryModel> getUserCategories() {
+		return userCategories;
 	}
 
-	public void setUserEvents(Set<EventModel> userEvents) {
-		this.userEvents = userEvents;
+	public void setUserCategories(Set<CategoryModel> userCategories) {
+		this.userCategories = userCategories;
 	}
 }

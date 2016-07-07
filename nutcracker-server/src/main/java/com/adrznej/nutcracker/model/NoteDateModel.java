@@ -1,20 +1,29 @@
 package com.adrznej.nutcracker.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="EDate")
-public class EventDateModel implements java.io.Serializable {
+@Table(name="NoteDate")
+public class NoteDateModel implements java.io.Serializable {
+
+	@Transient
+	private static final long serialVersionUID = -5749909120595187094L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int eventDateModelId;
 	
-	public EventDateModel() {
+	LocalDateTime noteCreation;
+	LocalDateTime noteDeadline;
+	
+	public NoteDateModel() {
 	}
 
 	public int getEventDateModelId() {
@@ -23,6 +32,22 @@ public class EventDateModel implements java.io.Serializable {
 
 	public void setEventDateModelId(int eventDateModelId) {
 		this.eventDateModelId = eventDateModelId;
+	}
+	
+	public LocalDateTime getNoteCreation() {
+		return noteCreation;
+	}
+
+	public void setNoteCreation(LocalDateTime noteCreation) {
+		this.noteCreation = noteCreation;
+	}
+
+	public LocalDateTime getNoteDeadline() {
+		return noteDeadline;
+	}
+
+	public void setNoteDeadline(LocalDateTime noteDeadline) {
+		this.noteDeadline = noteDeadline;
 	}
 
 	@Override

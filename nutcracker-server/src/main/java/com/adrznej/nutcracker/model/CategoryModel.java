@@ -1,16 +1,19 @@
 package com.adrznej.nutcracker.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="Category")
+@Table(name="NoteCategory")
 public class CategoryModel implements java.io.Serializable {
 
 	@Transient
@@ -21,12 +24,16 @@ public class CategoryModel implements java.io.Serializable {
 	private int categoryId;
 	
 	private String categoryName;
+	
+	@ManyToMany(mappedBy="userCategories")
+	private Set<UserModel> categoryUsers;
 
 	public CategoryModel() {
 	}
 
 	public CategoryModel(String categoryName) {
 		this.categoryName = categoryName;
+		this.categoryUsers = new HashSet<>();
 	}
 
 	public int getCategoryId() {
@@ -43,6 +50,14 @@ public class CategoryModel implements java.io.Serializable {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public Set<UserModel> getCategoryUsers() {
+		return categoryUsers;
+	}
+
+	public void setCategoryUsers(Set<UserModel> categoryUsers) {
+		this.categoryUsers = categoryUsers;
 	}
 
 	@Override
