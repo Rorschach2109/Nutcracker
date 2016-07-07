@@ -6,6 +6,8 @@
   <name>NutcrackerServer</name>
   
   <build>
+  	<finalName>${project.artifactId}</finalName>
+  	
   	<plugins>
   	
   		<plugin>
@@ -35,6 +37,15 @@
 	  		<configuration>
 	  			<ejbVersion>3.2</ejbVersion>
 	  		</configuration>
+  		</plugin>
+  		
+  		<plugin>
+  			<groupId>org.wildfly.plugins</groupId>
+  			<artifactId>wildfly-maven-plugin</artifactId>
+  			<version>1.0.2.Final</version>
+  			<configuration>
+  				<filename>${project.build.finalName}.jar</filename>
+  			</configuration>
   		</plugin>
   	
   	</plugins>
