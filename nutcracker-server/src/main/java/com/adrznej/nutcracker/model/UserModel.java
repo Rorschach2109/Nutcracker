@@ -10,14 +10,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import com.adrznej.nutcracker.query.UserModelNamedQueries;
+
 @Entity
 @Table(name="User",
 		uniqueConstraints={@UniqueConstraint(columnNames={"userLogin"})})
+@NamedQueries({
+	@NamedQuery(name="getAllUsers",
+			query=UserModelNamedQueries.GET_ALL_USERS),
+	@NamedQuery(name="getUserByLogin",
+			query=UserModelNamedQueries.GET_USER_BY_LOGIN)
+	})
 public class UserModel implements java.io.Serializable {
 
 	@Transient
