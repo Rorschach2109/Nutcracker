@@ -10,12 +10,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.adrznej.nutcracker.query.NoteModelNamedQueries;
+
 @Entity
 @Table(name="Note")
-public class NoteModel implements java.io.Serializable {
+@NamedQueries({
+	@NamedQuery(name="getGlobalAvailableNotes",
+			query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
+	@NamedQuery(name="getNotesByPlace",
+		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
+	@NamedQuery(name="getNotesByMessage",
+		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
+	@NamedQuery(name="getNotesBefore",
+		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
+	@NamedQuery(name="getNotesAfter",
+		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
+	@NamedQuery(name="getNotesBetween",
+		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
+})
+public class NoteModel implements java.io.Serializable, java.lang.Comparable<NoteModel> {
 
 	@Transient
 	private static final long serialVersionUID = 9177390533227007889L;
@@ -128,6 +146,17 @@ public class NoteModel implements java.io.Serializable {
 		
 		NoteModel noteModel = (NoteModel) obj;
 		return this.message.equals(noteModel.message) &&
-				this.noteCategory.equals(noteModel.noteCategory);
+				this.noteCategory.equals(noteModel.noteCategory) && 
+				this.noteOwner.equals(noteModel.noteOwner);
+	}
+
+	@Override
+	public int compareTo(NoteModel noteModel) {
+		int noteDateComparisonResult = this.noteDate.compareTo(noteModel.noteDate);
+		if (0 != noteDateComparisonResult) {
+			return noteDateComparisonResult;
+		}
+		
+		return this.noteCategory.compareTo(noteModel.noteCategory);
 	}
 }
