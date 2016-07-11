@@ -3,6 +3,7 @@ package com.adrznej.nutcracker.controller.bean;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -47,7 +48,6 @@ public class UserControllerBean implements UserControllerRemote {
 	@Override
 	public void changeUserPassword(String userLogin, String oldPassword, String newPassword) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
@@ -73,6 +73,25 @@ public class UserControllerBean implements UserControllerRemote {
 	}
 
 	@Override
+	public void removeUserNote(String userLogin, NoteModel note) {
+		if (false == this.userDao.userExist(userLogin)) {
+			return;
+		}
+		
+		UserModel user = this.userDao.getUserByLogin(userLogin);
+		
+		if (note.getNoteOwner().getUserModelId() != user.getUserModelId()) {
+			return;
+		}
+		
+		Set<NoteModel> userNotes = user.getUserNotes();
+		userNotes.remove(note);
+		user.setUserNotes(userNotes);
+		
+		this.userDao.updateUser(user);
+	}
+
+	@Override
 	public Set<NoteModel> getUserNotes(String userLogin) {
 		if (false == this.userDao.userExist(userLogin)) {
 			return Collections.emptySet();
@@ -80,6 +99,19 @@ public class UserControllerBean implements UserControllerRemote {
 		
 		UserModel user = this.userDao.getUserByLogin(userLogin);
 		return user.getUserNotes();
+	}
+	
+	@Override
+	public List<NoteModel> getUserNotesWithDeadline(String userLogin) {
+		if (false == this.userDao.userExist(userLogin)) {
+			return Collections.emptyList();
+		}
+		
+		UserModel user = this.userDao.getUserByLogin(userLogin);
+		return user.getUserNotes().stream()
+				.filter(note -> note.getNoteDate().getNoteDeadline() != null)
+				.sorted()
+				.collect(Collectors.toList()) ;
 	}
 	
 	@Override
@@ -111,5 +143,4 @@ public class UserControllerBean implements UserControllerRemote {
 		
 		return user.getUserCategories();
 	}
-
 }

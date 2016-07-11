@@ -2,9 +2,11 @@ package com.adrznej.nutcracker.dao.bean;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.adrznej.nutcracker.dao.local.NoteDaoRemote;
 import com.adrznej.nutcracker.model.NoteModel;
@@ -12,58 +14,70 @@ import com.adrznej.nutcracker.model.NoteModel;
 @Stateless
 public class NoteDaoBean implements NoteDaoRemote {
 
+	@PersistenceContext(unitName="nutcracker-unit")
+	EntityManager entityManager;
+
 	@Override
-	public void insertNote(String userLogin, NoteModel note) {
-		// TODO Auto-generated method stub
+	public NoteModel getNoteById(int noteId) {
+		return this.entityManager.find(NoteModel.class, noteId);
+	}
+	
+	@Override
+	public void updateNote(NoteModel note) {
+		NoteModel oldNote = this.getNoteById(note.getNoteModelId());
+		if (null == oldNote) {
+			return;
+		}
 		
-	}
-
-	@Override
-	public void editNote(NoteModel note) {
-		// TODO Auto-generated method stub
+		oldNote.setGlobalAvailable(note.isGlobalAvailable());
+		oldNote.setNoteCategory(note.getNoteCategory());
+		oldNote.setMessage(note.getMessage());
+		oldNote.setNotePlace(note.getNotePlace());
 		
+		this.entityManager.refresh(oldNote);
 	}
 
 	@Override
-	public Set<NoteModel> getUserNotes(String userLogin) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	@SuppressWarnings("unchecked")
 	public List<NoteModel> getGlobalAvailableNotes() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = this.entityManager.createNamedQuery("getGlobalAvailableNotes");
+		return (List<NoteModel>) query.getResultList();
 	}
 
 	@Override
-	public List<NoteModel> getUserNotesWithDeadline(String userLogin) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<NoteModel> getNotesBeforeDate(String userLogin, LocalDateTime date) {
+		Query query = this.entityManager.createNamedQuery("getNotesBefore");
+		return (List<NoteModel>) query.getResultList();
 	}
 
 	@Override
-	public List<NoteModel> getUserNotesBeforeDate(String userLogin, LocalDateTime deadline) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<NoteModel> getNotesAfterDate(String userLogin, LocalDateTime date) {
+		Query query = this.entityManager.createNamedQuery("getNotesAfter");
+		return (List<NoteModel>) query.getResultList();
 	}
 
 	@Override
-	public List<NoteModel> getUserNotesAfterDate(String userLogin, LocalDateTime deadline) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<NoteModel> getNotesBetweenDates(String userLogin, 
+			LocalDateTime fromDate, LocalDateTime toDate) {
+		Query query = this.entityManager.createNamedQuery("getNotesBetween");
+		return (List<NoteModel>) query.getResultList();
 	}
 
 	@Override
-	public List<NoteModel> getUserNotesByPlace(String userLogin, String place) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<NoteModel> getNotesByPlace(String userLogin, String place){
+		Query query = this.entityManager.createNamedQuery("getNotesByPlace");
+		return (List<NoteModel>) query.getResultList();
 	}
 
 	@Override
-	public List<NoteModel> findNotesByContent(String content) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<NoteModel> getNotesByMessage(String userLogin, String message) {
+		Query query = this.entityManager.createNamedQuery("getNotesByMessage");
+		return (List<NoteModel>) query.getResultList();
 	}
 
 }

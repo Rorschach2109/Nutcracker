@@ -52,7 +52,7 @@ public class UserDaoBean implements UserDaoLocal {
 
 	@Override
 	public void updateUser(UserModel userModel) {
-		this.entityManager.merge(userModel);
+		this.entityManager.refresh(userModel);
 	}
 	
 	@Override

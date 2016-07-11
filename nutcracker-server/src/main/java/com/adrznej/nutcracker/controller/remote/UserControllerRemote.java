@@ -19,7 +19,9 @@ public interface UserControllerRemote {
 	public List<UserModel> getAllUsers();
 	
 	public void addUserNote(String userLogin, NoteModel note);
+	public void removeUserNote(String userLogin, NoteModel note);
 	public Set<NoteModel> getUserNotes(String userLogin);
+	public List<NoteModel> getUserNotesWithDeadline(String userLogin);
 	
 	public void addUserCategory(String userLogin, CategoryModel category);
 	public Set<CategoryModel> getUserCategories(String userLogin);
