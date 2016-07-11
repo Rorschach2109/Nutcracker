@@ -1,6 +1,7 @@
 package com.adrznej.nutcracker.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -95,5 +96,25 @@ public class UserModel implements java.io.Serializable {
 
 	public void setUserCategories(Set<CategoryModel> userCategories) {
 		this.userCategories = userCategories;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.userLogin, this.userModelId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (false == obj instanceof UserModel) {
+			return false;
+		}
+		
+		if (this == obj) {
+			return true;
+		}
+		
+		UserModel userModel = (UserModel) obj;
+		return this.userLogin.equals(userModel.userLogin) &&
+				this.userModelId == userModel.userModelId;
 	}
 }
