@@ -27,17 +27,26 @@ public class NoteModel implements java.io.Serializable {
 	@Column(nullable=false, columnDefinition="TEXT")
 	private String message;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade={CascadeType.REFRESH})
+	private UserModel noteOwner;
+		
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="CategoryId")
 	private CategoryModel noteCategory;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="PlaceId")
 	private NotePlaceModel notePlace;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="DateId")
 	private NoteDateModel noteDate;
+	
+	private boolean globalAvailable;
+	
+	{
+		this.globalAvailable = false;
+	}
 	
 	public NoteModel() {
 	}
@@ -62,6 +71,14 @@ public class NoteModel implements java.io.Serializable {
 		this.message = message;
 	}
 
+	public UserModel getNoteOwner() {
+		return noteOwner;
+	}
+
+	public void setNoteOwner(UserModel noteOwner) {
+		this.noteOwner = noteOwner;
+	}
+
 	public CategoryModel getNoteCategory() {
 		return noteCategory;
 	}
@@ -84,6 +101,14 @@ public class NoteModel implements java.io.Serializable {
 
 	public void setNoteDate(NoteDateModel noteDate) {
 		this.noteDate = noteDate;
+	}
+
+	public boolean isGlobalAvailable() {
+		return globalAvailable;
+	}
+
+	public void setGlobalAvailable(boolean globalAvailable) {
+		this.globalAvailable = globalAvailable;
 	}
 
 	@Override

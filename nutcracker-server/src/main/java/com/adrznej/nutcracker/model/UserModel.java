@@ -1,5 +1,6 @@
 package com.adrznej.nutcracker.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -53,7 +54,7 @@ public class UserModel implements java.io.Serializable {
 	public UserModel(String userLogin, String userPassword) {
 		this.userLogin = userLogin;
 		this.userPassword = userPassword;
-		this.userNotes = null;
+		this.userNotes = new HashSet<>();
 	}
 
 	public int getUserModelId() {
