@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="NoteDate")
-public class NoteDateModel implements java.io.Serializable {
+public class NoteDateModel implements java.io.Serializable, java.lang.Comparable<NoteDateModel> {
 
 	@Transient
 	private static final long serialVersionUID = -5749909120595187094L;
@@ -60,5 +60,11 @@ public class NoteDateModel implements java.io.Serializable {
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
 		return super.equals(obj);
+	}
+
+	@Override
+	public int compareTo(NoteDateModel o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
