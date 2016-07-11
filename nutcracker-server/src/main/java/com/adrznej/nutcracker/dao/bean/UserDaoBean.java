@@ -9,15 +9,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.adrznej.nutcracker.dao.remote.UserDaoRemote;
+import com.adrznej.nutcracker.dao.local.UserDaoLocal;
 import com.adrznej.nutcracker.model.CategoryModel;
-import com.adrznej.nutcracker.model.NoteModel;
 import com.adrznej.nutcracker.model.UserModel;
 
 @Stateless
-public class UserDaoBean implements UserDaoRemote {
+public class UserDaoBean implements UserDaoLocal {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="nutcracker-unit")
 	private EntityManager entityManager;
 	
 	@Override
@@ -38,12 +37,24 @@ public class UserDaoBean implements UserDaoRemote {
 		Query query = this.entityManager.createNamedQuery("getAllUsers");
 		return (List<UserModel>) query.getResultList();
 	}
+	
+	@Override
+	public boolean userExist(String userLogin) {
+		Query query = this.entityManager.createNamedQuery("getUserByLogin");
+		query.setParameter("userLogin", userLogin);
+		return query.getResultList().size() > 0;
+	}
 
 	@Override
 	public void createUser(UserModel userModel) {
 		this.entityManager.persist(userModel);		
 	}
 
+	@Override
+	public void updateUser(UserModel userModel) {
+		this.entityManager.merge(userModel);
+	}
+	
 	@Override
 	public void deleteUser(String userLogin) {
 		this.entityManager.remove(this.getUserByLogin(userLogin));
@@ -52,11 +63,6 @@ public class UserDaoBean implements UserDaoRemote {
 	@Override
 	public Set<CategoryModel> getUserCategories(String userLogin) {
 		return this.getUserByLogin(userLogin).getUserCategories();
-	}
-
-	@Override
-	public Set<NoteModel> getUserNotes(String userLogin) {
-		return this.getUserByLogin(userLogin).getUserNotes();		
 	}
 
 }
