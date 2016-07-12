@@ -1,4 +1,4 @@
-package com.adrznej.nutcracker.utils.converters;
+package com.nutcracker.model.converters;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
