@@ -20,6 +20,7 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 
 	@Override
 	public int inserUser(NutUser user) {
+		//TODO: check if user exists
 		this.entityManager.persist(user);
 		this.entityManager.flush();
 		return user.getUserId();
