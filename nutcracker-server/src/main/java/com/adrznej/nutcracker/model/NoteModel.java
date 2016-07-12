@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,20 @@ import com.adrznej.nutcracker.query.NoteModelNamedQueries;
 
 @Entity
 @Table(name="Note")
+@NamedQueries({
+	@NamedQuery(name="getGlobalAvailableNotes",
+			query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
+	@NamedQuery(name="getNotesByPlace",
+		query=NoteModelNamedQueries.GET_NOTES_BY_PLACE),
+	@NamedQuery(name="getNotesByMessage",
+		query=NoteModelNamedQueries.GET_NOTES_BY_MESSAGE),
+	@NamedQuery(name="getNotesBefore",
+		query=NoteModelNamedQueries.GET_NOTES_BEFORE_DATE),
+	@NamedQuery(name="getNotesAfter",
+		query=NoteModelNamedQueries.GET_NOTES_AFTER_DATE),
+	@NamedQuery(name="getNotesBetween",
+		query=NoteModelNamedQueries.GET_NOTES_BETWEEN_DATES),
+})
 public class NoteModel implements java.io.Serializable, java.lang.Comparable<NoteModel> {
 
 	@Transient
@@ -34,11 +49,11 @@ public class NoteModel implements java.io.Serializable, java.lang.Comparable<Not
 	@ManyToOne(cascade={CascadeType.REFRESH})
 	private UserModel noteOwner;
 		
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name="CategoryId")
 	private CategoryModel noteCategory;
 	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name="PlaceId")
 	private NotePlaceModel notePlace;
 	
@@ -46,17 +61,15 @@ public class NoteModel implements java.io.Serializable, java.lang.Comparable<Not
 	@JoinColumn(name="DateId")
 	private NoteDateModel noteDate;
 	
+	@Convert(converter=com.adrznej.nutcracker.utils.converters.BooleanConverter.class)
 	private boolean globalAvailable;
-	
-	{
-		this.globalAvailable = false;
-	}
 	
 	public NoteModel() {
 	}
 
 	public NoteModel(String message) {
 		this.message = message;
+		this.globalAvailable = false;
 	}
 
 	public int getNoteModelId() {

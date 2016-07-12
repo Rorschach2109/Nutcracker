@@ -4,19 +4,19 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter(autoApply=true)
-public class BooleanConverter implements AttributeConverter<Boolean, String>{
+public class BooleanConverter implements AttributeConverter<Boolean, String> {
     
 	@Override
     public String convertToDatabaseColumn(Boolean value) {
         if (Boolean.TRUE.equals(value)) {
-            return "T";
+            return "TRUE";
         } else {
-            return "F";
+            return "FALSE";
         }
     }
     
     @Override
     public Boolean convertToEntityAttribute(String value) {
-        return "T".equals(value);
+        return "TRUE".equals(value);
     }
 }
