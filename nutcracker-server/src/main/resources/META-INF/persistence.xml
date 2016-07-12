@@ -6,11 +6,10 @@
   <provider>org.hibernate.ejb.HibernatePersistence</provider>
   <jta-data-source>java:jboss/datasources/NutCrackerDB</jta-data-source>
   
-  <class>com.adrznej.nutcracker.model.CategoryModel</class>
-  <class>com.adrznej.nutcracker.model.NoteDateModel</class>
-  <class>com.adrznej.nutcracker.model.NoteModel</class>
-  <class>com.adrznej.nutcracker.model.NotePlaceModel</class>
-  <class>com.adrznej.nutcracker.model.UserModel</class>
+  <class>com.nutcracker.model.NutCategory</class>
+  <class>com.nutcracker.model.NutNote</class>
+  <class>com.nutcracker.model.NutPlace</class>
+  <class>com.nutcracker.model.NutUser</class>
   <exclude-unlisted-classes>true</exclude-unlisted-classes>
   <properties>
      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
