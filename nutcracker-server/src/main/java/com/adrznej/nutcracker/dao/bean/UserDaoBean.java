@@ -62,7 +62,7 @@ public class UserDaoBean implements UserDaoLocal {
 
 	@Override
 	public Set<CategoryModel> getUserCategories(String userLogin) {
-		return this.getUserByLogin(userLogin).getUserCategories();
+		return null; //this.getUserByLogin(userLogin).getUserCategories();
 	}
 
 }
