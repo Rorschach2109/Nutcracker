@@ -1,6 +1,7 @@
 package com.adrznej.nutcracker.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,14 +27,14 @@ public class CategoryModel implements java.io.Serializable, java.lang.Comparable
 	private String categoryName;
 	
 	@ManyToMany(mappedBy="userCategories")
-	private Set<UserModel> categoryUsers;
+	private List<UserModel> categoryUsers;
 
 	public CategoryModel() {
 	}
 
 	public CategoryModel(String categoryName) {
 		this.categoryName = categoryName;
-		this.categoryUsers = new HashSet<>();
+		this.categoryUsers = new ArrayList<>();
 	}
 
 	public int getCategoryId() {
@@ -52,11 +53,11 @@ public class CategoryModel implements java.io.Serializable, java.lang.Comparable
 		this.categoryName = categoryName;
 	}
 
-	public Set<UserModel> getCategoryUsers() {
+	public List<UserModel> getCategoryUsers() {
 		return categoryUsers;
 	}
 
-	public void setCategoryUsers(Set<UserModel> categoryUsers) {
+	public void setCategoryUsers(List<UserModel> categoryUsers) {
 		this.categoryUsers = categoryUsers;
 	}
 

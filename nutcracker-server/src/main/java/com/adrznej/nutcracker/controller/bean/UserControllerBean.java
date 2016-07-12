@@ -63,7 +63,7 @@ public class UserControllerBean implements UserControllerRemote {
 		
 		UserModel user = this.userDao.getUserByLogin(userLogin);
 		
-		Set<NoteModel> userNotes = user.getUserNotes();
+		List<NoteModel> userNotes = user.getUserNotes();
 		userNotes.add(note);
 		user.setUserNotes(userNotes);
 		
@@ -84,7 +84,7 @@ public class UserControllerBean implements UserControllerRemote {
 			return;
 		}
 		
-		Set<NoteModel> userNotes = user.getUserNotes();
+		List<NoteModel> userNotes = user.getUserNotes();
 		userNotes.remove(note);
 		user.setUserNotes(userNotes);
 		
@@ -92,9 +92,9 @@ public class UserControllerBean implements UserControllerRemote {
 	}
 
 	@Override
-	public Set<NoteModel> getUserNotes(String userLogin) {
+	public List<NoteModel> getUserNotes(String userLogin) {
 		if (false == this.userDao.userExist(userLogin)) {
-			return Collections.emptySet();
+			return Collections.emptyList();
 		}
 		
 		UserModel user = this.userDao.getUserByLogin(userLogin);
@@ -122,11 +122,11 @@ public class UserControllerBean implements UserControllerRemote {
 		
 		UserModel user = this.userDao.getUserByLogin(userLogin);
 		
-		Set<CategoryModel> userCategories = user.getUserCategories();
+		List<CategoryModel> userCategories = user.getUserCategories();
 		userCategories.add(category);
 		user.setUserCategories(userCategories);
 		
-		Set<UserModel> categoryUsers = category.getCategoryUsers();
+		List<UserModel> categoryUsers = category.getCategoryUsers();
 		categoryUsers.add(user);
 		category.setCategoryUsers(categoryUsers);
 		
@@ -134,9 +134,9 @@ public class UserControllerBean implements UserControllerRemote {
 	}
 	
 	@Override
-	public Set<CategoryModel> getUserCategories(String userLogin) {
+	public List<CategoryModel> getUserCategories(String userLogin) {
 		if (false == this.userDao.userExist(userLogin)) {
-			return Collections.emptySet();
+			return Collections.emptyList();
 		}
 		
 		UserModel user = this.userDao.getUserByLogin(userLogin);

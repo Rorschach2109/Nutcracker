@@ -1,8 +1,8 @@
 package com.adrznej.nutcracker.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -44,10 +44,10 @@ public class UserModel implements java.io.Serializable {
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinColumn(name="UserNoteId")
-	private Set<NoteModel> userNotes;
+	private List<NoteModel> userNotes;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	private Set<CategoryModel> userCategories;
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<CategoryModel> userCategories;
 	
 	public UserModel() {
 	}
@@ -55,7 +55,8 @@ public class UserModel implements java.io.Serializable {
 	public UserModel(String userLogin, String userPassword) {
 		this.userLogin = userLogin;
 		this.userPassword = userPassword;
-		this.userNotes = new HashSet<>();
+		this.userNotes = new ArrayList<>();
+		this.userCategories = new ArrayList<>();
 	}
 
 	public int getUserModelId() {
@@ -82,19 +83,19 @@ public class UserModel implements java.io.Serializable {
 		this.userPassword = userPassword;
 	}
 
-	public Set<NoteModel> getUserNotes() {
+	public List<NoteModel> getUserNotes() {
 		return userNotes;
 	}
 
-	public void setUserNotes(Set<NoteModel> userNotes) {
+	public void setUserNotes(List<NoteModel> userNotes) {
 		this.userNotes = userNotes;
 	}
 
-	public Set<CategoryModel> getUserCategories() {
+	public List<CategoryModel> getUserCategories() {
 		return userCategories;
 	}
 
-	public void setUserCategories(Set<CategoryModel> userCategories) {
+	public void setUserCategories(List<CategoryModel> userCategories) {
 		this.userCategories = userCategories;
 	}
 

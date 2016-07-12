@@ -29,7 +29,7 @@ public class NoteDaoBean implements NoteDaoLocal {
 			return;
 		}
 		
-		oldNote.setGlobalAvailable(note.isGlobalAvailable());
+		oldNote.setGlobalAvailable(note.getGlobalAvailable());
 		oldNote.setNoteCategory(note.getNoteCategory());
 		oldNote.setMessage(note.getMessage());
 		oldNote.setNotePlace(note.getNotePlace());
@@ -77,6 +77,8 @@ public class NoteDaoBean implements NoteDaoLocal {
 	@SuppressWarnings("unchecked")
 	public List<NoteModel> getNotesByMessage(String userLogin, String message) {
 		Query query = this.entityManager.createNamedQuery("getNotesByMessage");
+		query.setParameter("len", message.length());
+		query.setParameter("message", message.toLowerCase());
 		return (List<NoteModel>) query.getResultList();
 	}
 

@@ -61,7 +61,7 @@ public class NoteModel implements java.io.Serializable, java.lang.Comparable<Not
 	@JoinColumn(name="DateId")
 	private NoteDateModel noteDate;
 	
-	@Convert(converter=com.adrznej.nutcracker.utils.converters.BooleanConverter.class)
+	@Convert(converter=com.nutcracker.model.converters.BooleanConverter.class)
 	private boolean globalAvailable;
 	
 	public NoteModel() {
@@ -120,7 +120,7 @@ public class NoteModel implements java.io.Serializable, java.lang.Comparable<Not
 		this.noteDate = noteDate;
 	}
 
-	public boolean isGlobalAvailable() {
+	public boolean getGlobalAvailable() {
 		return globalAvailable;
 	}
 
