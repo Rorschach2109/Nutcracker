@@ -19,20 +19,6 @@ import com.adrznej.nutcracker.query.NoteModelNamedQueries;
 
 @Entity
 @Table(name="Note")
-@NamedQueries({
-	@NamedQuery(name="getGlobalAvailableNotes",
-			query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
-	@NamedQuery(name="getNotesByPlace",
-		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
-	@NamedQuery(name="getNotesByMessage",
-		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
-	@NamedQuery(name="getNotesBefore",
-		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
-	@NamedQuery(name="getNotesAfter",
-		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
-	@NamedQuery(name="getNotesBetween",
-		query=NoteModelNamedQueries.GET_GLOBAL_AVAILABLE_NOTES),
-})
 public class NoteModel implements java.io.Serializable, java.lang.Comparable<NoteModel> {
 
 	@Transient

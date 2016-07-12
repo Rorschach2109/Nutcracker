@@ -3,12 +3,12 @@ package com.adrznej.nutcracker.dao.local;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 import com.adrznej.nutcracker.model.NoteModel;
 
-@Remote
-public interface NoteDaoRemote {
+@Local
+public interface NoteDaoLocal {
 	
 	public NoteModel getNoteById(int noteId);
 	

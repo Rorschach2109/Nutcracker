@@ -8,11 +8,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.adrznej.nutcracker.dao.local.NoteDaoRemote;
+import com.adrznej.nutcracker.dao.local.NoteDaoLocal;
 import com.adrznej.nutcracker.model.NoteModel;
 
 @Stateless
-public class NoteDaoBean implements NoteDaoRemote {
+public class NoteDaoBean implements NoteDaoLocal {
 
 	@PersistenceContext(unitName="nutcracker-unit")
 	EntityManager entityManager;

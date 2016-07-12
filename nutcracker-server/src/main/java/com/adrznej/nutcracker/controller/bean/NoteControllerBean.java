@@ -7,14 +7,14 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.adrznej.nutcracker.controller.remote.NoteControllerRemote;
-import com.adrznej.nutcracker.dao.local.NoteDaoRemote;
+import com.adrznej.nutcracker.dao.local.NoteDaoLocal;
 import com.adrznej.nutcracker.model.NoteModel;
 
 @Stateless
 public class NoteControllerBean implements NoteControllerRemote {
 
 	@Inject
-	NoteDaoRemote noteDao;
+	NoteDaoLocal noteDao;
 	
 	@Override
 	public List<NoteModel> getGlobalAvailableNotes(String userLogin) {
