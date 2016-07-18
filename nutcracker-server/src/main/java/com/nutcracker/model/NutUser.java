@@ -1,8 +1,8 @@
 package com.nutcracker.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -39,21 +39,21 @@ public class NutUser implements java.io.Serializable {
 		joinColumns={@JoinColumn(name="userId")}, 
 		inverseJoinColumns={@JoinColumn(name="categoryId")}
 	)
-	private List<NutCategory> userCategories;
+	private Set<NutCategory> userCategories;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="User_Note", 
 		joinColumns={@JoinColumn(name="userId")}, 
 		inverseJoinColumns={@JoinColumn(name="noteId")}
 	)
-	private List<NutNote> userNotes;
+	private Set<NutNote> userNotes;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="User_Place",
 		joinColumns={@JoinColumn(name="userId")},
 		inverseJoinColumns={@JoinColumn(name="placeId")}
 	)
-	private List<NutPlace> userPlaces;
+	private Set<NutPlace> userPlaces;
 	
 	public NutUser() {
 	}
@@ -61,9 +61,9 @@ public class NutUser implements java.io.Serializable {
 	public NutUser(String userLogin, String userPassword) {
 		this.userLogin = userLogin;
 		this.userPassword = userPassword;
-		this.userCategories = new ArrayList<>();
-		this.userNotes = new ArrayList<>();
-		this.userPlaces = new ArrayList<>();
+		this.userCategories = new HashSet<>();
+		this.userNotes = new HashSet<>();
+		this.userPlaces = new HashSet<>();
 	}
 
 	public int getUserId() {
@@ -90,27 +90,27 @@ public class NutUser implements java.io.Serializable {
 		this.userPassword = userPassword;
 	}
 
-	public List<NutCategory> getUserCategories() {
+	public Set<NutCategory> getUserCategories() {
 		return userCategories;
 	}
 
-	public void setUserCategories(List<NutCategory> userCategories) {
+	public void setUserCategories(Set<NutCategory> userCategories) {
 		this.userCategories = userCategories;
 	}
 
-	public List<NutPlace> getUserPlaces() {
+	public Set<NutPlace> getUserPlaces() {
 		return userPlaces;
 	}
 
-	public void setUserPlaces(List<NutPlace> userPlaces) {
+	public void setUserPlaces(Set<NutPlace> userPlaces) {
 		this.userPlaces = userPlaces;
 	}
 
-	public List<NutNote> getUserNotes() {
+	public Set<NutNote> getUserNotes() {
 		return userNotes;
 	}
 
-	public void setUserNotes(List<NutNote> userNotes) {
+	public void setUserNotes(Set<NutNote> userNotes) {
 		this.userNotes = userNotes;
 	}
 

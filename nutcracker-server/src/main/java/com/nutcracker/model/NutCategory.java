@@ -1,8 +1,8 @@
 package com.nutcracker.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,14 +27,14 @@ public class NutCategory implements java.io.Serializable {
 	private String categoryName;
 	
 	@OneToMany(mappedBy="noteCategory", cascade=CascadeType.REMOVE)
-	private List<NutNote> categoryNotes;
+	private Set<NutNote> categoryNotes;
 
 	public NutCategory() {
 	}
 
 	public NutCategory(String categoryName) {
 		this.categoryName = categoryName;
-		this.categoryNotes = new ArrayList<>();
+		this.categoryNotes = new HashSet<>();
 	}
 
 	public int getCategoryId() {
@@ -53,11 +53,11 @@ public class NutCategory implements java.io.Serializable {
 		this.categoryName = categoryName;
 	}
 
-	public List<NutNote> getCategoryNotes() {
+	public Set<NutNote> getCategoryNotes() {
 		return categoryNotes;
 	}
 
-	public void setCategoryNotes(List<NutNote> categoryNotes) {
+	public void setCategoryNotes(Set<NutNote> categoryNotes) {
 		this.categoryNotes = categoryNotes;
 	}
 

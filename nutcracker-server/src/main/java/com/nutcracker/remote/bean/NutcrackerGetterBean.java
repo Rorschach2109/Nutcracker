@@ -24,7 +24,7 @@ public class NutcrackerGetterBean implements NutcrackerGetterRemote {
 	@Override
 	public List<NutNote> getUserNotes(int userId) {
 		NutUser user = this.entityManager.find(NutUser.class, userId);
-		return user.getUserNotes();
+		return user.getUserNotes().stream().collect(Collectors.toList());
 	}
 
 	@Override
@@ -46,13 +46,13 @@ public class NutcrackerGetterBean implements NutcrackerGetterRemote {
 	@Override
 	public List<NutCategory> getUserCategories(int userId) {
 		NutUser user = this.entityManager.find(NutUser.class, userId);
-		return user.getUserCategories();
+		return user.getUserCategories().stream().collect(Collectors.toList());
 	}
 
 	@Override
 	public List<NutPlace> getPlaces(int userId) {
 		NutUser user = this.entityManager.find(NutUser.class, userId);
-		return user.getUserPlaces();
+		return user.getUserPlaces().stream().collect(Collectors.toList());
 	}
 
 }

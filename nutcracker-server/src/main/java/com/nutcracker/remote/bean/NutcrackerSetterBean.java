@@ -1,6 +1,6 @@
 package com.nutcracker.remote.bean;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -34,7 +34,7 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 			return false;
 		}
 	
-		List<NutCategory> userCategories = currentUser.getUserCategories();
+		Set<NutCategory> userCategories = currentUser.getUserCategories();
 		if (userCategories.contains(category)) {
 			return false;
 		}
@@ -60,7 +60,7 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 		note.setNoteCategory(category);
 		note.setNotePlace(place);
 		
-		List<NutNote> userNotes = currentUser.getUserNotes();
+		Set<NutNote> userNotes = currentUser.getUserNotes();
 		if (userNotes.contains(note)) {
 			return false;
 		}
@@ -80,7 +80,7 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 			return false;
 		}
 		
-		List<NutPlace> userPlaces = currentUser.getUserPlaces();
+		Set<NutPlace> userPlaces = currentUser.getUserPlaces();
 		if (userPlaces.contains(place)) {
 			return false;
 		}
