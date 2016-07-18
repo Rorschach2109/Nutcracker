@@ -11,14 +11,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.nutcracker.model.converters.BooleanConverter;
 import com.nutcracker.model.converters.LocalDateTimeConverter;
+import com.nutcracker.model.query.NutNoteNamedQuery;
 
 @Entity
 @Table(name="Note")
+@NamedQueries(
+	value={
+		@NamedQuery(name="noteWithDeadline", 
+			query=NutNoteNamedQuery.NOTE_WITH_DEADLINE),
+		@NamedQuery(name="noteByMessage",
+			query=NutNoteNamedQuery.NOTE_BY_MESSAGE),
+		@NamedQuery(name="noteByCategory",
+			query=NutNoteNamedQuery.NOTE_BY_CATEGORY),
+		@NamedQuery(name="noteByPlace",
+			query=NutNoteNamedQuery.NOTE_BY_PLACE)
+	}
+)
 public class NutNote implements java.io.Serializable {
 
 	@Transient
@@ -38,6 +53,9 @@ public class NutNote implements java.io.Serializable {
 	@ManyToOne
 	@JoinColumn(name="placeId")
 	private NutPlace notePlace;
+	
+	@ManyToOne
+	private NutUser noteOwner;
 	
 	@Convert(converter=LocalDateTimeConverter.class)
 	private LocalDateTime noteDeadline;
@@ -87,6 +105,14 @@ public class NutNote implements java.io.Serializable {
 
 	public void setNoteDeadline(LocalDateTime noteDeadline) {
 		this.noteDeadline = noteDeadline;
+	}
+
+	public NutUser getNoteOwner() {
+		return noteOwner;
+	}
+
+	public void setNoteOwner(NutUser noteOwner) {
+		this.noteOwner = noteOwner;
 	}
 
 	public boolean isGlobalAvailable() {
