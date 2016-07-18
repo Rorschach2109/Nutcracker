@@ -1,6 +1,5 @@
 package com.nutcracker.remote.bean;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -8,6 +7,7 @@ import java.util.stream.Stream;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
@@ -28,9 +28,12 @@ public class NutcrackerGetterBean implements NutcrackerGetterRemote {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<NutNote> getOtherUsersNotes(int userId) {
-		// TODO Auto-generated method stub
-		return Collections.emptyList();
+		Query query = this.entityManager.createNamedQuery("noteOther");
+		query.setParameter("userId", userId);
+		
+		return (List<NutNote>) query.getResultList();
 	}
 
 	@Override
