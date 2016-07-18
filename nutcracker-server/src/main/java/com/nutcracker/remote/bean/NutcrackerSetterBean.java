@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
@@ -20,7 +21,12 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 
 	@Override
 	public int inserUser(NutUser user) {
-		//TODO: check if user exists
+		Query query = this.entityManager.createNamedQuery("userCountByLogin");
+		query.setParameter("userLogin", user.getUserLogin());
+		if (0 < (long) query.getSingleResult()) {
+			return Integer.MIN_VALUE;
+		}
+		
 		this.entityManager.persist(user);
 		this.entityManager.flush();
 		return user.getUserId();
@@ -59,6 +65,7 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 		
 		note.setNoteCategory(category);
 		note.setNotePlace(place);
+		note.setNoteOwner(currentUser);
 		
 		Set<NutNote> userNotes = currentUser.getUserNotes();
 		if (userNotes.contains(note)) {
