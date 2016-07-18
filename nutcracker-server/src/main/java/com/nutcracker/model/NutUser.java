@@ -12,16 +12,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import com.nutcracker.model.query.NutUserNamedQuery;
+
 @Entity
 @Table(name="User", 
 	uniqueConstraints={
 		@UniqueConstraint(columnNames={"userLogin"})
-}) 
+})
+@NamedQueries(
+	value={
+		@NamedQuery(name="userCountByLogin",
+			query=NutUserNamedQuery.USER_COUNT_BY_LOGIN)
+	}
+)
 public class NutUser implements java.io.Serializable {
 	
 	@Transient
