@@ -1,6 +1,7 @@
 package com.nutcracker.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -102,5 +103,32 @@ public class NutNote implements java.io.Serializable {
 
 	public void setNotePlace(NutPlace notePlace) {
 		this.notePlace = notePlace;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.globalAvailable,
+				this.noteCategory,
+				this.noteMessage);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (null == obj) {
+			return false;
+		}
+		
+		if (this == obj) { 
+			return true;
+		}
+		
+		if (false == obj instanceof NutNote) {
+			return false;
+		}
+		
+		NutNote note = (NutNote) obj;
+		return this.globalAvailable == note.globalAvailable &&
+				this.noteCategory.equals(note.noteCategory) &&
+				this.noteMessage.equals(note.noteMessage);
 	}
 }

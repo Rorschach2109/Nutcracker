@@ -1,5 +1,7 @@
 package com.nutcracker.model;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -61,5 +63,33 @@ public class NutPlace implements java.io.Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.country,
+				this.city,
+				this.address);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (null == obj) {
+			return false;
+		}
+		
+		if (this == obj) { 
+			return true;
+		}
+		
+		if (false == obj instanceof NutPlace) {
+			return false;
+		}
+		
+		NutPlace place = (NutPlace) obj;
+		
+		return this.country.equals(place.country) && 
+				this.city.equals(place.city) && 
+				this.address.equals(place.address);
 	}
 }

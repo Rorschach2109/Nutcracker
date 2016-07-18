@@ -2,6 +2,7 @@ package com.nutcracker.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -111,5 +112,28 @@ public class NutUser implements java.io.Serializable {
 
 	public void setUserNotes(List<NutNote> userNotes) {
 		this.userNotes = userNotes;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.userLogin);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (null == obj) {
+			return false;
+		}
+		
+		if (this == obj) { 
+			return true;
+		}
+		
+		if (false == obj instanceof NutUser) {
+			return false;
+		}
+		
+		NutUser user = (NutUser) obj;
+		return this.userLogin.equals(user.userLogin);
 	}
 }
