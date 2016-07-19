@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.nutcracker.model.NutNote;
+import com.nutcracker.model.NutUser;
 import com.nutcracker.remote.NutcrackerFinderRemote;
 
 @Stateless
@@ -85,6 +86,14 @@ public class NutcrackerFinderBean implements NutcrackerFinderRemote {
 		query.setParameter("categoryName", categoryParameter);
 		
 		return (List<NutNote>) query.getResultList();
+	}
+	
+	@Override
+	public NutUser findUserByLogin(String userLogin) {
+		Query query = this.entityManager.createNamedQuery("userByLogin");
+		
+		query.setParameter("userLogin", userLogin);
+		return (NutUser) query.getSingleResult();
 	}
 	
 	private String createStringWithWildcards(String message) {
