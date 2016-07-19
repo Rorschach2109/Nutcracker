@@ -10,7 +10,7 @@ import com.nutcracker.model.NutUser;
 @Remote
 public interface NutcrackerSetterRemote {
 	
-	public int inserUser(NutUser user);
+	public int insertUser(NutUser user);
 	
 	public boolean insertCategory(int userId, NutCategory category);
 	public boolean insertNote(int userId, NutNote note, int categoryId, int placeId);

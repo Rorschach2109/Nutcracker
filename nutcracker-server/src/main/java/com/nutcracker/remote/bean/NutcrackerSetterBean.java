@@ -20,7 +20,7 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 	EntityManager entityManager;
 
 	@Override
-	public int inserUser(NutUser user) {
+	public int insertUser(NutUser user) {
 		Query query = this.entityManager.createNamedQuery("userCountByLogin");
 		query.setParameter("userLogin", user.getUserLogin());
 		if (0 < (long) query.getSingleResult()) {
