@@ -22,6 +22,14 @@ public class NutcrackerGetterBean implements NutcrackerGetterRemote {
 	EntityManager entityManager;
 	
 	@Override
+	public boolean userExist(String userLogin) {
+		Query query = this.entityManager.createNamedQuery("userCountByLogin");
+		query.setParameter("userLogin", userLogin);
+		
+		return 0 < (long) query.getSingleResult();
+	}
+	
+	@Override
 	public List<NutNote> getUserNotes(int userId) {
 		NutUser user = this.entityManager.find(NutUser.class, userId);
 		return user.getUserNotes().stream().collect(Collectors.toList());

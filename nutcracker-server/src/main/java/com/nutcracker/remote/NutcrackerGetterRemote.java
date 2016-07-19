@@ -11,6 +11,8 @@ import com.nutcracker.model.NutPlace;
 @Remote
 public interface NutcrackerGetterRemote {
 
+	public boolean userExist(String userLogin);
+	
 	public List<NutNote> getUserNotes(int userId);
 	public List<NutNote> getOtherUsersNotes(int userId);
 	public List<NutNote> getAvailableNotes(int userId);
