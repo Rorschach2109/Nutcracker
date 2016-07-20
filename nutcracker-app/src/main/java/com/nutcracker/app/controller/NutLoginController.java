@@ -1,6 +1,7 @@
 package com.nutcracker.app.controller;
 
 import com.nutcracker.app.util.NutRemoteProxy;
+import com.nutcracker.app.util.TextValidator;
 import com.nutcracker.app.view.INutView;
 import com.nutcracker.app.view.NutLoginView;
 import com.nutcracker.model.NutUser;
@@ -25,18 +26,7 @@ public class NutLoginController implements INutController {
 	}
 	
 	public void logIn(String userLogin, String userPassword) {
-		if (false == userExists(userLogin)) {
-			loginView.showUserNotExistLabel(userLogin);
-			return;
-		}
-		
-		if (false == validatePasswordComplexity(userPassword)) {
-			loginView.showInvalidPasswordComplexityLabel();
-			return;
-		}
-		
-		if (false == validatePasswordEquality(userPassword)) {
-			loginView.showInvalidPasswordLabel();
+		if (false == logInValidation(userLogin, userPassword)) {
 			return;
 		}
 		
@@ -44,13 +34,7 @@ public class NutLoginController implements INutController {
 	}
 	
 	public void signUp(String userLogin, String userPassword) {
-		if (userExists(userLogin)) {
-			loginView.showUserExistLabel(userLogin);
-			return;
-		}
-		
-		if (false == validatePasswordComplexity(userPassword)) {
-			loginView.showInvalidPasswordComplexityLabel();
+		if (false == signUpValidation(userLogin, userPassword)) {
 			return;
 		}
 		
@@ -69,8 +53,10 @@ public class NutLoginController implements INutController {
 	}
 	
 	private boolean validatePasswordComplexity(String password) {
-		//TODO: Implementation
-		return true;
+		//TODO: Magic number !!
+		return TextValidator.isMultiCase(password) &&
+				TextValidator.hasNumber(password) &&
+				TextValidator.hasMinimumLength(password, 0);
 	}
 
 	private boolean validatePasswordEquality(String password) {
@@ -95,5 +81,48 @@ public class NutLoginController implements INutController {
 		NutcrackerFinderRemote nutFinder = this.remoteProxy.getNutFinder();
 		NutUser currentUser = nutFinder.findUserByLogin(userLogin);
 		this.mainController.setCurrentUserId(currentUser.getUserId());
+	}
+	
+	private boolean logInValidation(String userLogin, String userPassword) {
+		if (TextValidator.isEmpty(userLogin)) {
+			loginView.showUserLoginEmptyLabel();
+			return false;
+		}
+		
+		if (false == userExists(userLogin)) {
+			loginView.showUserNotExistLabel(userLogin);
+			return false;
+		}
+		
+		if (false == validatePasswordComplexity(userPassword)) {
+			loginView.showInvalidPasswordComplexityLabel();
+			return false;
+		}
+		
+		if (false == validatePasswordEquality(userPassword)) {
+			loginView.showInvalidPasswordLabel();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private boolean signUpValidation(String userLogin, String userPassword) {
+		if (TextValidator.isEmpty(userLogin)) {
+			loginView.showUserLoginEmptyLabel();
+			return false;
+		}
+		
+		if (userExists(userLogin)) {
+			loginView.showUserExistLabel(userLogin);
+			return false;
+		}
+		
+		if (false == validatePasswordComplexity(userPassword)) {
+			loginView.showInvalidPasswordComplexityLabel();
+			return false;
+		}
+		
+		return true;
 	}
 }
