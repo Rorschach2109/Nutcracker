@@ -31,6 +31,7 @@ public class NutLoginController implements INutController {
 		}
 		
 		setExistingUser(userLogin);
+		this.mainController.enterMainWindow();
 	}
 	
 	public void signUp(String userLogin, String userPassword) {
@@ -41,6 +42,7 @@ public class NutLoginController implements INutController {
 		if (false == createNewUser(userLogin, userPassword)) {
 			return;
 		}
+		this.mainController.enterMainWindow();
 	}
 	
 	public void onClose() {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nutcracker.app.view.NutcrackerMainView">
+   <left>
+      <VBox prefHeight="445.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="88.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="remindersButton" mnemonicParsing="false" onMouseReleased="#handleRemindersButtonReleased" prefHeight="58.0" prefWidth="200.0" text="Reminders" />
+            <Button fx:id="notesButton" mnemonicParsing="false" onMouseReleased="#handleNotesButtonReleased" prefHeight="58.0" prefWidth="200.0" text="Notes" />
+            <Button fx:id="categoriesButton" mnemonicParsing="false" onMouseReleased="#handleCategoriesButtonReleased" prefHeight="58.0" prefWidth="200.0" text="Categories" />
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <AnchorPane prefHeight="27.0" prefWidth="807.0" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </AnchorPane>
+   </bottom>
+   <center>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="445.0" prefWidth="606.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
