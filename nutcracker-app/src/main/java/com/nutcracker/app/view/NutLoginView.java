@@ -29,7 +29,12 @@ public final class NutLoginView implements INutView {
 	}
 	
 	public void showUserExistLabel(String userLogin) {
-		this.loginErrorLabel.setText(String.format("User already %s exist", userLogin));
+		this.loginErrorLabel.setText(String.format("User %s already exist", userLogin));
+		this.loginErrorLabel.setVisible(true);
+	}
+	
+	public void showUserLoginEmptyLabel() {
+		this.loginErrorLabel.setText("User login cannot be empty");
 		this.loginErrorLabel.setVisible(true);
 	}
 	
