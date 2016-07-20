@@ -12,11 +12,11 @@ import com.nutcracker.remote.NutcrackerSetterRemote;
 public class NutLoginController implements INutController {
 
 	private NutLoginView loginView;
-	private final NutAppController mainController;
+	private final NutAppController nutAppController;
 	private final NutRemoteProxy remoteProxy;
 	
-	public NutLoginController(NutAppController mainController, NutRemoteProxy remoteProxy) {
-		this.mainController = mainController;
+	public NutLoginController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
+		this.nutAppController = nutAppController;
 		this.remoteProxy = remoteProxy;
 	}
 	
@@ -31,7 +31,7 @@ public class NutLoginController implements INutController {
 		}
 		
 		setExistingUser(userLogin);
-		this.mainController.enterMainWindow();
+		this.nutAppController.enterMainWindow();
 	}
 	
 	public void signUp(String userLogin, String userPassword) {
@@ -42,11 +42,11 @@ public class NutLoginController implements INutController {
 		if (false == createNewUser(userLogin, userPassword)) {
 			return;
 		}
-		this.mainController.enterMainWindow();
+		this.nutAppController.enterMainWindow();
 	}
 	
 	public void onClose() {
-		this.mainController.close();
+		this.nutAppController.close();
 	}
 	
 	private boolean userExists(String userLogin) {
@@ -75,14 +75,14 @@ public class NutLoginController implements INutController {
 			return false;
 		}
 		
-		this.mainController.setCurrentUserId(userId);
+		this.nutAppController.setCurrentUserId(userId);
 		return true;
 	}
 	
 	private void setExistingUser(String userLogin) {
 		NutcrackerFinderRemote nutFinder = this.remoteProxy.getNutFinder();
 		NutUser currentUser = nutFinder.findUserByLogin(userLogin);
-		this.mainController.setCurrentUserId(currentUser.getUserId());
+		this.nutAppController.setCurrentUserId(currentUser.getUserId());
 	}
 	
 	private boolean logInValidation(String userLogin, String userPassword) {

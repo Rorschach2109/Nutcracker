@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 public class NutCrackerApp extends Application {
 
-	private final NutAppController nutController;
+	private final NutAppController nutAppController;
 	
 	{
-		this.nutController = new NutAppController();
+		this.nutAppController = new NutAppController();
 	}
 	
 	public static void main(String[] args) {
@@ -19,10 +19,10 @@ public class NutCrackerApp extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		if (false == nutController.initialize()) {
+		if (false == nutAppController.initialize()) {
 			return;
 		}
 		
-		nutController.start(primaryStage);
+		nutAppController.start(primaryStage);
 	}
 }
