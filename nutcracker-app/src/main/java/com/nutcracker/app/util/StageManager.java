@@ -41,6 +41,7 @@ public class StageManager {
 		
 		this.currentStage.close();
 		this.currentStage.setScene(stageScene);
+		this.currentStage.setResizable(false);
 		this.currentStage.show();
 	}
 	
