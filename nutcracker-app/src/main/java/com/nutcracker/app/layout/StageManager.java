@@ -1,4 +1,4 @@
-package com.nutcracker.app.util;
+package com.nutcracker.app.layout;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,11 +15,8 @@ public class StageManager {
 	private Stage currentStage;
 	private INutView currentView;
 	
-	private FXMLLoader fxmlLoader;
-	
 	{
 		this.currentStage = null;
-		this.fxmlLoader = new FXMLLoader();
 	}
 	
 	public void setStage(Stage stage) {
@@ -35,9 +32,10 @@ public class StageManager {
 	}
 	
 	public void changeStage(String sceneResourcePath) {
-		Scene stageScene = loadScene(sceneResourcePath);
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		Scene stageScene = loadScene(fxmlLoader, sceneResourcePath);
 		
-		this.setCurrentController();		
+		this.setCurrentController(fxmlLoader);		
 		
 		this.currentStage.close();
 		this.currentStage.setScene(stageScene);
@@ -45,11 +43,11 @@ public class StageManager {
 		this.currentStage.show();
 	}
 	
-	private Scene loadScene(String sceneResourcePath) {
+	private Scene loadScene(FXMLLoader fxmlLoader, String sceneResourcePath) {
 		Scene scene = null;
 		
 		try {
-			Pane pane = loadLayout(sceneResourcePath);
+			Pane pane = loadLayout(fxmlLoader, sceneResourcePath);
 			scene = new Scene(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,14 +56,14 @@ public class StageManager {
 		return scene;
 	}
 	
-	private Pane loadLayout(String sceneResourcePath) throws IOException {
+	private Pane loadLayout(FXMLLoader fxmlLoader, String sceneResourcePath) throws IOException {
 		URL resourcePath = getClass().getClassLoader().getResource(sceneResourcePath);
-		this.fxmlLoader.setLocation(resourcePath); 
-		
-		return this.fxmlLoader.load();
+		fxmlLoader.setLocation(resourcePath); 
+
+		return fxmlLoader.load();
 	}
 	
-	private void setCurrentController() {
-		this.currentView = this.fxmlLoader.getController();
+	private void setCurrentController(FXMLLoader fxmlLoader) {
+		this.currentView = fxmlLoader.getController();
 	}
 }
