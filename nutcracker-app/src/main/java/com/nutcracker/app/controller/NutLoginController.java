@@ -12,10 +12,10 @@ import com.nutcracker.remote.NutcrackerSetterRemote;
 public class NutLoginController implements INutController {
 
 	private NutLoginView loginView;
-	private final NutController mainController;
+	private final NutAppController mainController;
 	private final NutRemoteProxy remoteProxy;
 	
-	public NutLoginController(NutController mainController, NutRemoteProxy remoteProxy) {
+	public NutLoginController(NutAppController mainController, NutRemoteProxy remoteProxy) {
 		this.mainController = mainController;
 		this.remoteProxy = remoteProxy;
 	}

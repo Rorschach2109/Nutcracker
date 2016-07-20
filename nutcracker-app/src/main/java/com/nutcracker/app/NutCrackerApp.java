@@ -1,16 +1,16 @@
 package com.nutcracker.app;
 
-import com.nutcracker.app.controller.NutController;
+import com.nutcracker.app.controller.NutAppController;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class NutCrackerApp extends Application {
 
-	private final NutController nutController;
+	private final NutAppController nutController;
 	
 	{
-		this.nutController = new NutController();
+		this.nutController = new NutAppController();
 	}
 	
 	public static void main(String[] args) {

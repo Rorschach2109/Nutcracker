@@ -8,7 +8,7 @@ import com.nutcracker.app.view.ResourcePathFinder;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
-public class NutController implements INutController {
+public class NutAppController implements INutController {
 
 	private NutRemoteProxy nutRemoteProxy;
 	private StageManager stageManager;
