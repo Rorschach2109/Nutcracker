@@ -22,7 +22,6 @@ public class NutMainView implements INutView {
 	private AnchorPane contentPane;
 	
 	public void generateContent(List<NutNote> contentList, ListCell<NutNote> cellFactory) {
-		System.out.println("generateContent");
 		ListView<NutNote> layoutList = createLayoutList(contentList, cellFactory);
 		changeLayoutList(layoutList);
 	}
