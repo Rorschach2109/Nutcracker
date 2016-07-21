@@ -27,6 +27,15 @@ public class NutcrackerFinderBean implements NutcrackerFinderRemote {
 		query.setParameter("userId", userId);
 		return (List<NutNote>) query.getResultList();
 	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<NutNote> findNotesWithoutDeadline(int userId) {
+		Query query = this.entityManager.createNamedQuery("noteWithoutDeadline");
+		
+		query.setParameter("userId", userId);
+		return (List<NutNote>) query.getResultList();
+	}
 
 	@Override
 	public List<NutNote> findNotesBeforeDate(int userId, LocalDateTime date) {

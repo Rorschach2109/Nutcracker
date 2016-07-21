@@ -12,6 +12,7 @@ import com.nutcracker.model.NutUser;
 public interface NutcrackerFinderRemote {
 
 	public List<NutNote> findNotesWithDeadline(int userId);
+	public List<NutNote> findNotesWithoutDeadline(int userId);
 	public List<NutNote> findNotesBeforeDate(int userId, LocalDateTime date);
 	public List<NutNote> findNotesAfterDate(int userId, LocalDateTime date);
 	public List<NutNote> findNotesBetweenDates(int userId, LocalDateTime fromDate, 
