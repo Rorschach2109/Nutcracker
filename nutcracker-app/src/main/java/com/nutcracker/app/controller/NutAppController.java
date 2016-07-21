@@ -39,11 +39,19 @@ public class NutAppController implements INutController {
 	
 	public void enterMainWindow() {
 		this.stageManager.changeStage(ResourcePathFinder.MAIN_VIEW);
+		
+		NutMainController mainController = new NutMainController(this, nutRemoteProxy);
+		INutView view = this.stageManager.getCurrentView();
+		view.setController(mainController);
 	}
 	
 	public void close() {
 		Platform.exit();
 		System.exit(0);
+	}
+	
+	public int getCurrentUserId() {
+		return this.currentUserId;
 	}
 	
 	public void setCurrentUserId(int currentUserId) {
