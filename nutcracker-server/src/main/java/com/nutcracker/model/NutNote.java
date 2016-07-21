@@ -26,6 +26,8 @@ import com.nutcracker.model.query.NutNoteNamedQuery;
 	value={
 		@NamedQuery(name="noteWithDeadline", 
 			query=NutNoteNamedQuery.NOTE_WITH_DEADLINE),
+		@NamedQuery(name="noteWithoutDeadline", 
+			query=NutNoteNamedQuery.NOTE_WITHOUT_DEADLINE),
 		@NamedQuery(name="noteByMessage",
 			query=NutNoteNamedQuery.NOTE_BY_MESSAGE),
 		@NamedQuery(name="noteByCategory",
@@ -44,6 +46,9 @@ public class NutNote implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int noteId;
+	
+	@Column(nullable=false)
+	private String noteTitle;
 	
 	@Column(nullable=false, columnDefinition="TEXT")
 	private String noteMessage;
@@ -68,11 +73,12 @@ public class NutNote implements java.io.Serializable {
 	public NutNote() {
 	}
 	
-	public NutNote(String noteMessage) {
-		this(noteMessage, false);
+	public NutNote(String noteTitle, String noteMessage) {
+		this(noteTitle, noteMessage, false);
 	}
 	
-	public NutNote(String noteMessage, boolean globalAvailable) {
+	public NutNote(String noteTitle, String noteMessage, boolean globalAvailable) {
+		this.noteTitle = noteTitle;
 		this.noteMessage = noteMessage;
 		this.globalAvailable = globalAvailable;
 	}
@@ -83,6 +89,14 @@ public class NutNote implements java.io.Serializable {
 
 	public void setNoteId(int noteId) {
 		this.noteId = noteId;
+	}
+
+	public String getNoteTitle() {
+		return noteTitle;
+	}
+
+	public void setNoteTitle(String noteTitle) {
+		this.noteTitle = noteTitle;
 	}
 
 	public String getNoteMessage() {
