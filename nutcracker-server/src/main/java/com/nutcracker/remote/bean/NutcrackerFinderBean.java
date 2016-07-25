@@ -18,6 +18,15 @@ public class NutcrackerFinderBean implements NutcrackerFinderRemote {
 
 	@PersistenceContext(unitName="nutcracker-unit")
 	private EntityManager entityManager;
+		
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<NutNote> findUserGlobalNotes(String userLogin) {
+		Query query = this.entityManager.createNamedQuery("noteGlobal");
+		query.setParameter("userLogin", userLogin);
+		
+		return (List<NutNote>) query.getResultList();
+	}
 	
 	@Override
 	@SuppressWarnings("unchecked")
