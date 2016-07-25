@@ -83,4 +83,9 @@ public class NutCategory implements java.io.Serializable {
 		NutCategory category = (NutCategory) obj;
 		return this.categoryName.equals(category.categoryName);
 	}
+	
+	@Override
+	public String toString() {
+		return this.categoryName;
+	}
 }
