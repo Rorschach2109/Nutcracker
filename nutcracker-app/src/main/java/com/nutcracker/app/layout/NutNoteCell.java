@@ -1,5 +1,6 @@
 package com.nutcracker.app.layout;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.nutcracker.model.NutNote;
@@ -40,7 +41,7 @@ public class NutNoteCell extends AbstractCell<NutNote> {
 		this.ownerLabel.setText(note.getNoteOwner().getUserLogin());
 		this.categoryLabel.setText(note.getNoteCategory().getCategoryName());
 		
-		LocalDateTime noteDeadline = note.getNoteDeadline();
+		LocalDate noteDeadline = note.getNoteDeadline();
 		String deadlineText = "";
 		if (null != noteDeadline) {
 			deadlineText = noteDeadline.toString();

@@ -1,5 +1,6 @@
 package com.nutcracker.app.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class NutMainController implements INutController {
 	public void generateFutureContent() {
 		NutcrackerFinderRemote nutFinder = remoteProxy.getNutFinder();
 		List<NutNote> notes = nutFinder.findNotesAfterDate(
-				nutAppController.getCurrentUserId(), LocalDateTime.now());
+				nutAppController.getCurrentUserId(), LocalDate.now());
 		
 		generateContent(notes,  NutNote.class);
 	}
@@ -48,7 +49,7 @@ public class NutMainController implements INutController {
 	public void generatePastContent() {
 		NutcrackerFinderRemote nutFinder = remoteProxy.getNutFinder();
 		List<NutNote> notes = nutFinder.findNotesBeforeDate(
-				nutAppController.getCurrentUserId(), LocalDateTime.now());
+				nutAppController.getCurrentUserId(), LocalDate.now());
 		
 		generateContent(notes,  NutNote.class);	
 	}
