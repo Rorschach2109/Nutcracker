@@ -35,7 +35,9 @@ import com.nutcracker.model.query.NutNoteNamedQuery;
 		@NamedQuery(name="noteByPlace",
 			query=NutNoteNamedQuery.NOTE_BY_PLACE),
 		@NamedQuery(name="noteOther",
-			query=NutNoteNamedQuery.NOTE_OTHER)
+			query=NutNoteNamedQuery.NOTE_OTHER),
+		@NamedQuery(name="noteGlobal",
+			query=NutNoteNamedQuery.NOTE_GLOBAL)
 	}
 )
 public class NutNote implements java.io.Serializable {
