@@ -7,10 +7,9 @@ import com.nutcracker.model.NutNote;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
 
-public class NutNoteCell extends ListCell<NutNote> {
+public class NutNoteCell extends AbstractCell<NutNote> {
 	
 	private final GridPane grid;
 	private final Label iconLabel;
@@ -34,22 +33,7 @@ public class NutNoteCell extends ListCell<NutNote> {
 	}
 	
 	@Override
-	public void updateItem(NutNote note, boolean empty) {
-		super.updateItem(note, empty);
-		
-		if (null == note) {
-			clearContent();
-		} else {
-			addContent(note);
-		}
-	}
-	
-	private void clearContent() {
-		setText(null);
-		setGraphic(null);
-	}
-	
-	private void addContent(NutNote note) {
+	protected void addContent(NutNote note) {
 		setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		
 		this.titleLabel.setText(note.getNoteTitle());
