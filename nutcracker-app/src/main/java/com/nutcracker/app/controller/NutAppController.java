@@ -50,7 +50,14 @@ public class NutAppController implements INutController {
 		INutView view = this.stageManager.showNewStage(ResourcePathFinder.NOTE_DETAILS_VIEW);
 		
 		NutNoteDetailsController noteDetailsController = new NutNoteDetailsController(this, nutRemoteProxy);
-		noteDetailsController.setView(view);
+		view.setController(noteDetailsController);
+	}
+	
+	public void showAddCategoryWindow(Stage parentStage) {
+		INutView view = this.stageManager.showNewStage(ResourcePathFinder.CATEGORY_ADD_VIEW, parentStage);
+		
+		NutCategoryAddController categoryAddController = new NutCategoryAddController(this, nutRemoteProxy);
+		view.setController(categoryAddController);
 	}
 	
 	public INutView showNewStage(String sceneResourcePath) {
