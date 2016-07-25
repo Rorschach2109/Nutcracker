@@ -43,6 +43,17 @@ public class StageManager {
 		this.currentStage.show();
 	}
 	
+	public INutView showNewStage(String sceneResourcePath) {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		Scene stageScene = loadScene(fxmlLoader, sceneResourcePath);
+		
+		Stage newStage = new Stage();
+		newStage.setScene(stageScene);
+		newStage.setResizable(false);
+		newStage.show();
+		return fxmlLoader.getController();
+	}
+	
 	private Scene loadScene(FXMLLoader fxmlLoader, String sceneResourcePath) {
 		Scene scene = null;
 		
