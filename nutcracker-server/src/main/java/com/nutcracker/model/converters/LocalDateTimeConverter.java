@@ -1,22 +1,24 @@
 package com.nutcracker.model.converters;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter(autoApply=true)
-public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime, Timestamp> {
+public class LocalDateTimeConverter implements AttributeConverter<LocalDate, Date> {
 
 	@Override
-	public Timestamp convertToDatabaseColumn(LocalDateTime localDateTime) {
-		return (null == localDateTime ? null : Timestamp.valueOf(localDateTime));
+	public Date convertToDatabaseColumn(LocalDate localDateTime) {
+		return (null == localDateTime ? null : Date.valueOf(localDateTime));
 	}
 
 	@Override
-	public LocalDateTime convertToEntityAttribute(Timestamp sqlTimestamp) {
-		return (null == sqlTimestamp ? null : sqlTimestamp.toLocalDateTime());
+	public LocalDate convertToEntityAttribute(Date sqlTimestamp) {
+		return (null == sqlTimestamp ? null : sqlTimestamp.toLocalDate());
 	}
 
 }

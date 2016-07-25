@@ -1,5 +1,6 @@
 package com.nutcracker.remote.bean;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class NutcrackerFinderBean implements NutcrackerFinderRemote {
 	}
 
 	@Override
-	public List<NutNote> findNotesBeforeDate(int userId, LocalDateTime date) {
+	public List<NutNote> findNotesBeforeDate(int userId, LocalDate date) {
 		List<NutNote> deadlineNotes = findNotesWithDeadline(userId);
 		return deadlineNotes.stream()
 				.filter(note -> note.getNoteDeadline().compareTo(date) < 0)
@@ -55,7 +56,7 @@ public class NutcrackerFinderBean implements NutcrackerFinderRemote {
 	}
 
 	@Override
-	public List<NutNote> findNotesAfterDate(int userId, LocalDateTime date) {
+	public List<NutNote> findNotesAfterDate(int userId, LocalDate date) {
 		List<NutNote> deadlineNotes = findNotesWithDeadline(userId);
 		return deadlineNotes.stream()
 				.filter(note -> note.getNoteDeadline().compareTo(date) > 0)
@@ -63,7 +64,7 @@ public class NutcrackerFinderBean implements NutcrackerFinderRemote {
 	}
 
 	@Override
-	public List<NutNote> findNotesBetweenDates(int userId, LocalDateTime fromDate, LocalDateTime toDate) {
+	public List<NutNote> findNotesBetweenDates(int userId, LocalDate fromDate, LocalDate toDate) {
 		List<NutNote> deadlineNotes = findNotesWithDeadline(userId);
 		return deadlineNotes.stream()
 				.filter(note -> 

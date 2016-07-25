@@ -1,5 +1,6 @@
 package com.nutcracker.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -67,7 +68,7 @@ public class NutNote implements java.io.Serializable {
 	private NutUser noteOwner;
 	
 	@Convert(converter=LocalDateTimeConverter.class)
-	private LocalDateTime noteDeadline;
+	private LocalDate noteDeadline;
 	
 	@Convert(converter=BooleanConverter.class)
 	private boolean globalAvailable;
@@ -117,11 +118,11 @@ public class NutNote implements java.io.Serializable {
 		this.noteCategory = noteCategory;
 	}
 
-	public LocalDateTime getNoteDeadline() {
+	public LocalDate getNoteDeadline() {
 		return noteDeadline;
 	}
 
-	public void setNoteDeadline(LocalDateTime noteDeadline) {
+	public void setNoteDeadline(LocalDate noteDeadline) {
 		this.noteDeadline = noteDeadline;
 	}
 
