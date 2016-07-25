@@ -76,6 +76,7 @@ public class NutLoginController implements INutController {
 		}
 		
 		this.nutAppController.setCurrentUserId(userId);
+		this.nutAppController.setCurrentUserLogin(userLogin);
 		return true;
 	}
 	

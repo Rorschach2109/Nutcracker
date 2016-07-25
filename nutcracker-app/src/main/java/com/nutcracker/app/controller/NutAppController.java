@@ -14,6 +14,7 @@ public class NutAppController implements INutController {
 	private StageManager stageManager;
 	
 	private int currentUserId;
+	private String currentUserLogin;
 
 	{
 		this.nutRemoteProxy = new NutRemoteProxy();
@@ -56,5 +57,13 @@ public class NutAppController implements INutController {
 	
 	public void setCurrentUserId(int currentUserId) {
 		this.currentUserId = currentUserId;
+	}
+	
+	public String getCurrentUserLogin() {
+		return this.currentUserLogin;
+	}
+	
+	public void setCurrentUserLogin(String currentUserLogin) {
+		this.currentUserLogin = currentUserLogin;
 	}
 }
