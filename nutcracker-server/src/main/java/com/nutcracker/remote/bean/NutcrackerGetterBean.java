@@ -30,6 +30,23 @@ public class NutcrackerGetterBean implements NutcrackerGetterRemote {
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
+	public List<String> getUsersLogins() {
+		Query query = this.entityManager.createNamedQuery("userAll");
+		List<NutUser> users = (List<NutUser>) query.getResultList();
+		
+		return users.stream()
+				.map(user -> user.getUserLogin())
+				.collect(Collectors.toList());
+	}
+	
+	@Override
+	public String getUserLogin(int userId) {
+		NutUser user = this.entityManager.find(NutUser.class, userId);
+		return user.getUserLogin();
+	}
+	
+	@Override
 	public List<NutNote> getUserNotes(int userId) {
 		NutUser user = this.entityManager.find(NutUser.class, userId);
 		return user.getUserNotes().stream().collect(Collectors.toList());

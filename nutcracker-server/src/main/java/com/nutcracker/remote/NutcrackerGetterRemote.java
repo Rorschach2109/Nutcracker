@@ -13,6 +13,10 @@ public interface NutcrackerGetterRemote {
 
 	public boolean userExist(String userLogin);
 	
+	public List<String> getUsersLogins();
+	
+	public String getUserLogin(int userId);
+	
 	public List<NutNote> getUserNotes(int userId);
 	public List<NutNote> getOtherUsersNotes(int userId);
 	public List<NutNote> getAvailableNotes(int userId);
