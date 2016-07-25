@@ -8,6 +8,7 @@ import com.nutcracker.app.view.INutView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class StageManager {
@@ -44,12 +45,22 @@ public class StageManager {
 	}
 	
 	public INutView showNewStage(String sceneResourcePath) {
+		return showNewStage(sceneResourcePath, null);
+	}
+
+	public INutView showNewStage(String sceneResourcePath, Stage parentStage) {
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		Scene stageScene = loadScene(fxmlLoader, sceneResourcePath);
 		
 		Stage newStage = new Stage();
 		newStage.setScene(stageScene);
 		newStage.setResizable(false);
+		
+		if (null != parentStage) {
+			newStage.initModality(Modality.WINDOW_MODAL);
+			newStage.initOwner(parentStage);
+		}
+		
 		newStage.show();
 		return fxmlLoader.getController();
 	}
