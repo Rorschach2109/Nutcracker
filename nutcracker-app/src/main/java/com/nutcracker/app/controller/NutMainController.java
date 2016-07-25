@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 import com.nutcracker.app.util.NutRemoteProxy;
 import com.nutcracker.app.view.INutView;
 import com.nutcracker.app.view.NutMainView;
+import com.nutcracker.app.view.ResourcePathFinder;
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
 import com.nutcracker.remote.NutcrackerFinderRemote;
 import com.nutcracker.remote.NutcrackerGetterRemote;
+import com.nutcracker.remote.NutcrackerSetterRemote;
 
 import javafx.collections.FXCollections;
 import javafx.scene.control.ListCell;
@@ -65,6 +67,10 @@ public class NutMainController implements INutController {
 		//insertOtherUsersCategories(userCategories);
 		
 		generateContent(userCategories, NutCategory.class);
+	}
+	
+	public void addFuture() {
+		this.nutAppController.showAddFutureWindow();
 	}
 	
 	@Override

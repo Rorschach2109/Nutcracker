@@ -56,12 +56,17 @@ public class NutMainView implements INutView {
 	}
 	
 	@FXML
-	private void handleAddButtonReleased() {
+	private void handleAddFutureButtonReleased() {
+		this.mainController.addFuture();
+	}
+	
+	@FXML
+	private void handleAddNoteButtonReleased() {
 		
 	}
 	
 	@FXML
-	private void handleRemoveButtonReleased() {
+	private void handleAddCategoryButtonReleased() {
 		
 	}
 }

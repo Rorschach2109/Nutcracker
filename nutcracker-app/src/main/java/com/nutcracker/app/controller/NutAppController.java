@@ -46,6 +46,17 @@ public class NutAppController implements INutController {
 		view.setController(mainController);
 	}
 	
+	public void showAddFutureWindow() {
+		INutView view = this.stageManager.showNewStage(ResourcePathFinder.NOTE_DETAILS_VIEW);
+		
+		NutNoteDetailsController noteDetailsController = new NutNoteDetailsController(this, nutRemoteProxy);
+		noteDetailsController.setView(view);
+	}
+	
+	public INutView showNewStage(String sceneResourcePath) {
+		return this.stageManager.showNewStage(sceneResourcePath);
+	}
+	
 	public void close() {
 		Platform.exit();
 		System.exit(0);
