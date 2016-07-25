@@ -5,6 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nutcracker.app.view.NutMainView">
@@ -12,9 +13,16 @@
       <VBox prefHeight="445.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="88.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="remindersButton" mnemonicParsing="false" onMouseReleased="#handleRemindersButtonReleased" prefHeight="58.0" prefWidth="200.0" text="Reminders" />
+            <Button fx:id="futureButton" mnemonicParsing="false" onMouseReleased="#handleFutureButtonReleased" prefHeight="58.0" prefWidth="200.0" text="Future" />
+            <Button fx:id="pastButton" mnemonicParsing="false" onMouseReleased="#handlePastButtonReleased" prefHeight="58.0" prefWidth="200.0" text="Past" />
             <Button fx:id="notesButton" mnemonicParsing="false" onMouseReleased="#handleNotesButtonReleased" prefHeight="58.0" prefWidth="200.0" text="Notes" />
             <Button fx:id="categoriesButton" mnemonicParsing="false" onMouseReleased="#handleCategoriesButtonReleased" prefHeight="58.0" prefWidth="200.0" text="Categories" />
+            <Pane prefHeight="124.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="addButton" layoutX="116.0" layoutY="100.0" mnemonicParsing="false" onMouseReleased="#handleAddButtonReleased" text="Add" />
+                  <Button fx:id="removeButton" layoutX="160.0" layoutY="100.0" mnemonicParsing="false" onMouseReleased="#handleRemoveButtonReleased" text="Del" />
+               </children>
+            </Pane>
          </children>
       </VBox>
    </left>

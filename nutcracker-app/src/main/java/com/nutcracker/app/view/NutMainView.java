@@ -36,8 +36,13 @@ public class NutMainView implements INutView {
 	}
 	
 	@FXML
-	private void handleRemindersButtonReleased() {
-		this.mainController.generateRemindersContent();
+	private void handleFutureButtonReleased() {
+		this.mainController.generateFutureContent();
+	}
+	
+	@FXML
+	private void handlePastButtonReleased() {
+		this.mainController.generatePastContent();
 	}
 	
 	@FXML
@@ -47,6 +52,16 @@ public class NutMainView implements INutView {
 	
 	@FXML
 	private void handleCategoriesButtonReleased() {
+		this.mainController.generateCategoriesContent();
+	}
+	
+	@FXML
+	private void handleAddButtonReleased() {
+		
+	}
+	
+	@FXML
+	private void handleRemoveButtonReleased() {
 		
 	}
 }
