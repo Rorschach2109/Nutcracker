@@ -7,7 +7,8 @@ public final class TextValidator {
 	}
 	
 	public static boolean isEmpty(String text) {
-		return 0 == text.length();
+		return null == text || 
+				0 == text.length();
 	}
 	
 	public static boolean isMultiCase(String text) {
