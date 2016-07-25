@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="567.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nutcracker.app.view.NutNoteDetailsView">
+   <children>
+      <GridPane layoutX="15.0" layoutY="14.0" prefHeight="364.0" prefWidth="532.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="83.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="448.0" minWidth="10.0" prefWidth="434.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="0.0" prefWidth="0.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="94.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="170.0" minHeight="0.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="286.0" minHeight="10.0" prefHeight="218.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Title" textAlignment="CENTER" />
+            <Label text="Category" textAlignment="CENTER" GridPane.rowIndex="1" />
+            <Label text="Place" GridPane.rowIndex="2" />
+            <Label text="Date" textAlignment="CENTER" GridPane.rowIndex="3" />
+            <Label text="Global" GridPane.rowIndex="4" />
+            <Label text="Message" textAlignment="CENTER" GridPane.rowIndex="5" />
+            <TextField fx:id="titleField" GridPane.columnIndex="1" />
+            <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ChoiceBox fx:id="categoryChoiceBox" prefHeight="26.0" prefWidth="198.0" />
+                  <Button fx:id="addCategoryButton" mnemonicParsing="false" onMouseReleased="#handleAddCategoryButtonReleased" text="Add" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </HBox>
+            <DatePicker fx:id="deadlinePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="gloablCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextArea fx:id="messageField" prefHeight="249.0" prefWidth="439.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <Button layoutX="418.0" layoutY="386.0" mnemonicParsing="false" onMouseReleased="#handleCancelButtonReleased" text="Cancel" />
+      <Button layoutX="494.0" layoutY="386.0" mnemonicParsing="false" onMouseReleased="#handleCreateButtonReleased" text="Create" />
+      <Label fx:id="errorLabel" layoutX="15.0" layoutY="360.0" prefHeight="26.0" prefWidth="362.0" textFill="#e7160b">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
