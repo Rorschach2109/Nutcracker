@@ -31,7 +31,9 @@ import com.nutcracker.model.query.NutUserNamedQuery;
 		@NamedQuery(name="userCountByLogin",
 			query=NutUserNamedQuery.USER_COUNT_BY_LOGIN),
 		@NamedQuery(name="userByLogin",
-			query=NutUserNamedQuery.USER_BY_LOGIN)
+			query=NutUserNamedQuery.USER_BY_LOGIN),
+		@NamedQuery(name="userAll",
+			query=NutUserNamedQuery.USER_ALL)
 	}
 )
 public class NutUser implements java.io.Serializable {
