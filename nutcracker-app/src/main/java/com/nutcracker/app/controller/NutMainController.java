@@ -31,10 +31,7 @@ public class NutMainController extends AbstractNutController {
 	private MAIN_CONTROLLER_STATE currentState;
 	
 	private final Map<MAIN_CONTROLLER_STATE, INutMainControllerState> stateMap;
-	private final NutAppController nutAppController;
-	private final NutRemoteProxy remoteProxy;
 	
-
 	private static final String CELL_FACTORY_TEMPLATE;
 	
 	static {
@@ -47,8 +44,7 @@ public class NutMainController extends AbstractNutController {
 	}
 	
 	public NutMainController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
-		this.nutAppController = nutAppController;
-		this.remoteProxy = remoteProxy;
+		super(nutAppController, remoteProxy);
 	}
 	
 	public void generateFutureContent() {

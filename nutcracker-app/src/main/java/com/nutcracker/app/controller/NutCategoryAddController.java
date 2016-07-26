@@ -18,12 +18,8 @@ public class NutCategoryAddController extends AbstractNutController {
 	
 	private Stage viewStage;
 	
-	private final NutAppController nutAppController;
-	private final NutRemoteProxy remoteProxy;
-	
 	public NutCategoryAddController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
-		this.nutAppController = nutAppController;
-		this.remoteProxy = remoteProxy;
+		super(nutAppController, remoteProxy);
 	}
 	
 	public void setStage(Stage viewStage) {

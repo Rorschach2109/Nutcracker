@@ -19,12 +19,8 @@ public class NutReminderAddController extends AbstractNutController {
 	private NutReminderAddView noteDetailsView;
 	private Stage viewStage;
 
-	private final NutAppController nutAppController;
-	private final NutRemoteProxy remoteProxy;
-	
 	public NutReminderAddController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
-		this.nutAppController = nutAppController;
-		this.remoteProxy = remoteProxy;
+		super(nutAppController, remoteProxy);
 	}
 	
 	public void initialize() {

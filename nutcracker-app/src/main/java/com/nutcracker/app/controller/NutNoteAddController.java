@@ -18,12 +18,8 @@ public class NutNoteAddController extends AbstractNutController {
 	private NutNoteAddView noteAddView;
 	private Stage viewStage;
 	
-	private final NutAppController nutAppController;
-	private final NutRemoteProxy remoteProxy;
-	
 	public NutNoteAddController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
-		this.nutAppController = nutAppController;
-		this.remoteProxy = remoteProxy;
+		super(nutAppController, remoteProxy);
 	}
 	
 	public void initialize() {
