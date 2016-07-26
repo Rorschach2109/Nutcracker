@@ -1,6 +1,7 @@
 package com.nutcracker.app.controller;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,7 @@ public class NutMainController extends AbstractNutController {
 		NutcrackerFinderRemote nutFinder = remoteProxy.getNutFinder();
 		List<NutNote> notes = nutFinder.findNotesAfterDate(
 				nutAppController.getCurrentUserId(), LocalDate.now());
+		Collections.sort(notes);
 		
 		generateContent(notes, NutNote.class);
 		this.currentState = MAIN_CONTROLLER_STATE.FUTURE;
@@ -60,6 +62,7 @@ public class NutMainController extends AbstractNutController {
 		NutcrackerFinderRemote nutFinder = remoteProxy.getNutFinder();
 		List<NutNote> notes = nutFinder.findNotesBeforeDate(
 				nutAppController.getCurrentUserId(), LocalDate.now());
+		Collections.sort(notes);
 		
 		generateContent(notes,  NutNote.class);
 		this.currentState = MAIN_CONTROLLER_STATE.PAST;
@@ -68,6 +71,7 @@ public class NutMainController extends AbstractNutController {
 	public void generateNotesContent() {
 		NutcrackerFinderRemote nutFinder = remoteProxy.getNutFinder();
 		List<NutNote> notes = nutFinder.findNotesWithoutDeadline(nutAppController.getCurrentUserId());
+		Collections.sort(notes);
 		
 		generateContent(notes, NutNote.class);
 		this.currentState = MAIN_CONTROLLER_STATE.NOTE;
@@ -76,6 +80,7 @@ public class NutMainController extends AbstractNutController {
 	public void generateCategoriesContent() {
 		NutcrackerGetterRemote nutGetter = remoteProxy.getNutGetter();
 		List<NutCategory> userCategories = nutGetter.getUserCategories(nutAppController.getCurrentUserId());
+		Collections.sort(userCategories);
 		
 		generateContent(userCategories, NutCategory.class);
 		this.currentState = MAIN_CONTROLLER_STATE.CATEGORY;
