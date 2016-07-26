@@ -70,7 +70,7 @@ public class NutMainController implements INutController {
 		generateContent(userCategories, NutCategory.class);
 	}
 	
-	public void addFuture() {
+	public void showAddFutureWindow() {
 		this.nutAppController.showAddFutureWindow();
 	}
 	

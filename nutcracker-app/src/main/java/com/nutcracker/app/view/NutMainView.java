@@ -57,7 +57,7 @@ public class NutMainView implements INutView {
 	
 	@FXML
 	private void handleAddFutureButtonReleased() {
-		this.mainController.addFuture();
+		this.mainController.showAddFutureWindow();
 	}
 	
 	@FXML
