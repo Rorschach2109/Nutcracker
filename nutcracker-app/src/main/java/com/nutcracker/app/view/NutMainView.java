@@ -67,6 +67,6 @@ public class NutMainView implements INutView {
 	
 	@FXML
 	private void handleAddCategoryButtonReleased() {
-		
+		this.mainController.showAddCategoryWindow();
 	}
 }

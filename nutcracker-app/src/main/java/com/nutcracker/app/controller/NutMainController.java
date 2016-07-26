@@ -89,6 +89,10 @@ public class NutMainController extends AbstractNutController {
 		this.nutAppController.showAddFutureWindow();
 	}
 	
+	public void showAddCategoryWindow() {
+		this.nutAppController.showAddCategoryWindow(this);
+	}
+	
 	public void updateLayoutList() {
 		this.stateMap.get(this.currentState).updateLayoutList(this);
 	}
