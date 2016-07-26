@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="Category")
-public class NutCategory implements java.io.Serializable {
+public class NutCategory implements java.io.Serializable, Comparable<NutCategory> {
 
 	@Transient
 	private static final long serialVersionUID = -2454744019929491022L;
@@ -87,5 +87,10 @@ public class NutCategory implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return this.categoryName;
+	}
+
+	@Override
+	public int compareTo(NutCategory nutCategory) {
+		return this.categoryName.compareTo(nutCategory.categoryName);
 	}
 }

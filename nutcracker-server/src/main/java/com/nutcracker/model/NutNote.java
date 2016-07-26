@@ -1,7 +1,6 @@
 package com.nutcracker.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -41,7 +40,7 @@ import com.nutcracker.model.query.NutNoteNamedQuery;
 			query=NutNoteNamedQuery.NOTE_GLOBAL)
 	}
 )
-public class NutNote implements java.io.Serializable {
+public class NutNote implements java.io.Serializable, Comparable<NutNote> {
 
 	@Transient
 	private static final long serialVersionUID = -8923629796851397384L;
@@ -175,5 +174,22 @@ public class NutNote implements java.io.Serializable {
 		return this.globalAvailable == note.globalAvailable &&
 				this.noteCategory.equals(note.noteCategory) &&
 				this.noteMessage.equals(note.noteMessage);
+	}
+
+	@Override
+	public int compareTo(NutNote nutNote) {
+		if (null != this.noteDeadline && null != nutNote.noteDeadline) {
+			int dateCompareResult = this.noteDeadline.compareTo(nutNote.noteDeadline);
+			if (0 != dateCompareResult) {
+				return dateCompareResult;
+			}
+		}
+		
+		int categoryCompareResult =  this.noteCategory.compareTo(nutNote.noteCategory);
+		if (0 != categoryCompareResult) {
+			return categoryCompareResult;
+		}
+		
+		return this.noteTitle.compareTo(nutNote.noteTitle);
 	}
 }
