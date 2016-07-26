@@ -23,6 +23,7 @@ public class NutCrackerApp extends Application {
 			return;
 		}
 		
-		nutAppController.start(primaryStage);
+		nutAppController.setStage(primaryStage);
+		nutAppController.start();
 	}
 }
