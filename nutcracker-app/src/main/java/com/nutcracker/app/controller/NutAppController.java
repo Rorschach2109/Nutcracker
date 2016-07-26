@@ -51,7 +51,7 @@ public class NutAppController implements INutController {
 	public void showAddFutureWindow() {
 		INutView view = this.stageManager.showNewStage(ResourcePathFinder.REMINDER_ADD_VIEW);
 		
-		NutNoteDetailsController noteDetailsController = new NutNoteDetailsController(this, nutRemoteProxy);
+		NutReminderAddController noteDetailsController = new NutReminderAddController(this, nutRemoteProxy);
 		noteDetailsController.setParentController(mainController);
 		view.setController(noteDetailsController);
 	}

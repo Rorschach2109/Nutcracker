@@ -6,7 +6,7 @@ import java.util.List;
 import com.nutcracker.app.util.NutRemoteProxy;
 import com.nutcracker.app.util.TextValidator;
 import com.nutcracker.app.view.INutView;
-import com.nutcracker.app.view.NutNoteDetailsView;
+import com.nutcracker.app.view.NutReminderAddView;
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
 import com.nutcracker.remote.NutcrackerGetterRemote;
@@ -14,15 +14,15 @@ import com.nutcracker.remote.NutcrackerSetterRemote;
 
 import javafx.stage.Stage;
 
-public class NutNoteDetailsController extends AbstractNutController {
+public class NutReminderAddController extends AbstractNutController {
 
-	private NutNoteDetailsView noteDetailsView;
+	private NutReminderAddView noteDetailsView;
 	private Stage viewStage;
 
 	private final NutAppController nutAppController;
 	private final NutRemoteProxy remoteProxy;
 	
-	public NutNoteDetailsController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
+	public NutReminderAddController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
 		this.nutAppController = nutAppController;
 		this.remoteProxy = remoteProxy;
 	}
@@ -81,7 +81,7 @@ public class NutNoteDetailsController extends AbstractNutController {
 	
 	@Override
 	public void setView(INutView view) {
-		this.noteDetailsView = (NutNoteDetailsView) view;
+		this.noteDetailsView = (NutReminderAddView) view;
 	}
 
 	@Override

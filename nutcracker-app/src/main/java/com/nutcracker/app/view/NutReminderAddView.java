@@ -3,7 +3,7 @@ package com.nutcracker.app.view;
 import java.util.List;
 
 import com.nutcracker.app.controller.INutController;
-import com.nutcracker.app.controller.NutNoteDetailsController;
+import com.nutcracker.app.controller.NutReminderAddController;
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
 
@@ -18,9 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class NutNoteDetailsView implements INutView {
+public class NutReminderAddView implements INutView {
 
-	private NutNoteDetailsController noteDetailsController;
+	private NutReminderAddController noteDetailsController;
 	
 	@FXML
 	private Pane noteDetailsPane;
@@ -43,7 +43,7 @@ public class NutNoteDetailsView implements INutView {
 	
 	@Override
 	public void setController(INutController controller) {
-		this.noteDetailsController = (NutNoteDetailsController) controller;
+		this.noteDetailsController = (NutReminderAddController) controller;
 		this.noteDetailsController.setView(this);
 		this.noteDetailsController.initialize();
 		this.noteDetailsController.setStage((Stage) this.noteDetailsPane.getScene().getWindow());
