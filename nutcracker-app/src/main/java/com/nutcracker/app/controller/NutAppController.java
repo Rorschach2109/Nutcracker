@@ -53,6 +53,10 @@ public class NutAppController implements INutController {
 		view.setController(noteDetailsController);
 	}
 	
+	public void showAddCategoryWindow() {
+		showAddCategoryWindow();
+	}
+	
 	public void showAddCategoryWindow(Stage parentStage) {
 		INutView view = this.stageManager.showNewStage(ResourcePathFinder.CATEGORY_ADD_VIEW, parentStage);
 		
