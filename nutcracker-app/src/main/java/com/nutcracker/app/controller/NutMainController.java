@@ -1,11 +1,9 @@
 package com.nutcracker.app.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.nutcracker.app.state.INutMainControllerState;
 import com.nutcracker.app.state.NutMainControllerCategoryState;
@@ -17,19 +15,17 @@ import com.nutcracker.app.state.INutMainControllerState.MAIN_CONTROLLER_STATE;
 import com.nutcracker.app.util.NutRemoteProxy;
 import com.nutcracker.app.view.INutView;
 import com.nutcracker.app.view.NutMainView;
-import com.nutcracker.app.view.ResourcePathFinder;
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
 import com.nutcracker.remote.NutcrackerFinderRemote;
 import com.nutcracker.remote.NutcrackerGetterRemote;
-import com.nutcracker.remote.NutcrackerSetterRemote;
 
 import javafx.collections.FXCollections;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 
-public class NutMainController implements INutController {
+public class NutMainController extends AbstractNutController {
 
 	private NutMainView mainView;
 	private MAIN_CONTROLLER_STATE currentState;
@@ -85,8 +81,6 @@ public class NutMainController implements INutController {
 		NutcrackerGetterRemote nutGetter = remoteProxy.getNutGetter();
 		List<NutCategory> userCategories = nutGetter.getUserCategories(nutAppController.getCurrentUserId());
 		
-		//insertOtherUsersCategories(userCategories);
-		
 		generateContent(userCategories, NutCategory.class);
 		this.currentState = MAIN_CONTROLLER_STATE.CATEGORY;
 	}
@@ -104,6 +98,11 @@ public class NutMainController implements INutController {
 		this.mainView = (NutMainView) view;
 	}
 	
+	@Override
+	public void updateView() {
+		this.stateMap.get(this.currentState).updateLayoutList(this);
+	}
+
 	private Map<MAIN_CONTROLLER_STATE, INutMainControllerState> initStateMap() {
 		Map<MAIN_CONTROLLER_STATE, INutMainControllerState> stateMap = new HashMap<>();
 		
@@ -114,21 +113,6 @@ public class NutMainController implements INutController {
 		stateMap.put(MAIN_CONTROLLER_STATE.CATEGORY, new NutMainControllerCategoryState());
 		
 		return stateMap;
-	}
-	
-	private List<String> getOtherUsersNames() {
-		NutcrackerGetterRemote nutGetter = remoteProxy.getNutGetter();
-		
-		return nutGetter.getUsersLogins().stream()
-				.filter(login -> !login.equals(nutAppController.getCurrentUserLogin()))
-				.collect(Collectors.toList());
-	}
-	
-	private void insertOtherUsersCategories(List<NutCategory> categories) {
-		categories.add(new NutCategory());
-		for (String login : getOtherUsersNames()) {
-			categories.add(new NutCategory(login));
-		}
 	}
 	
 	private <T> void generateContent(List<T> contentList, Class<T> classType) {

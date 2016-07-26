@@ -52,17 +52,19 @@ public class NutAppController implements INutController {
 		INutView view = this.stageManager.showNewStage(ResourcePathFinder.NOTE_DETAILS_VIEW);
 		
 		NutNoteDetailsController noteDetailsController = new NutNoteDetailsController(this, nutRemoteProxy);
+		noteDetailsController.setParentController(mainController);
 		view.setController(noteDetailsController);
 	}
 	
-	public void showAddCategoryWindow() {
-		showAddCategoryWindow();
+	public void showAddCategoryWindow(INutController parentController) {
+		showAddCategoryWindow(parentController, null);
 	}
 	
-	public void showAddCategoryWindow(Stage parentStage) {
+	public void showAddCategoryWindow(INutController parentController, Stage parentStage) {
 		INutView view = this.stageManager.showNewStage(ResourcePathFinder.CATEGORY_ADD_VIEW, parentStage);
 		
 		NutCategoryAddController categoryAddController = new NutCategoryAddController(this, nutRemoteProxy);
+		categoryAddController.setParentController(parentController);
 		view.setController(categoryAddController);
 	}
 	
@@ -93,5 +95,5 @@ public class NutAppController implements INutController {
 	
 	public void setCurrentUserLogin(String currentUserLogin) {
 		this.currentUserLogin = currentUserLogin;
-	}
+	}	
 }

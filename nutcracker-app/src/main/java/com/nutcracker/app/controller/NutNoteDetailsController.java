@@ -14,12 +14,13 @@ import com.nutcracker.remote.NutcrackerSetterRemote;
 
 import javafx.stage.Stage;
 
-public class NutNoteDetailsController implements INutController {
+public class NutNoteDetailsController extends AbstractNutController {
 
 	private NutNoteDetailsView noteDetailsView;
+	private Stage viewStage;
+
 	private final NutAppController nutAppController;
 	private final NutRemoteProxy remoteProxy;
-	private Stage viewStage;
 	
 	public NutNoteDetailsController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
 		this.nutAppController = nutAppController;
@@ -27,8 +28,7 @@ public class NutNoteDetailsController implements INutController {
 	}
 	
 	public void initialize() {
-		List<NutCategory> categories = getCategories();
-		this.noteDetailsView.insertCategories(categories);
+		updateCategories();
 	}
 	
 	public void setStage(Stage stage) {
@@ -68,11 +68,11 @@ public class NutNoteDetailsController implements INutController {
 		NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
 		nutSetter.insertNote(nutAppController.getCurrentUserId(), note, categoryId, placeId);
 		
-		nutAppController.updateMainView();
+		notifyParent();
 	}
 	
 	public void showAddCategoryWindow() {
-		nutAppController.showAddCategoryWindow(this.viewStage);
+		nutAppController.showAddCategoryWindow(this, this.viewStage);
 	}
 	
 	public void closeStage() {
@@ -82,6 +82,16 @@ public class NutNoteDetailsController implements INutController {
 	@Override
 	public void setView(INutView view) {
 		this.noteDetailsView = (NutNoteDetailsView) view;
+	}
+
+	@Override
+	public void updateView() {
+		updateCategories();
+	}
+	
+	private void updateCategories() {
+		List<NutCategory> categories = getCategories();
+		this.noteDetailsView.insertCategories(categories);
 	}
 	
 	private List<NutCategory> getCategories() {

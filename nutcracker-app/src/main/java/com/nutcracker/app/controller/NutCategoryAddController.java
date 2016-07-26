@@ -12,13 +12,14 @@ import com.nutcracker.remote.NutcrackerSetterRemote;
 
 import javafx.stage.Stage;
 
-public class NutCategoryAddController implements INutController {
+public class NutCategoryAddController extends AbstractNutController {
 
 	private NutCategoryAddView categoryAddView;
-	private final NutAppController nutAppController;
-	private final NutRemoteProxy remoteProxy;
 	
 	private Stage viewStage;
+	
+	private final NutAppController nutAppController;
+	private final NutRemoteProxy remoteProxy;
 	
 	public NutCategoryAddController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
 		this.nutAppController = nutAppController;
@@ -46,8 +47,7 @@ public class NutCategoryAddController implements INutController {
 	public void insertCategory(NutCategory category) {
 		NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
 		nutSetter.insertCategory(nutAppController.getCurrentUserId(), category);
-		
-		nutAppController.updateMainView();
+		notifyParent();
 	}
 	
 	public void closeStage() {
