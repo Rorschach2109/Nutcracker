@@ -89,6 +89,10 @@ public class NutMainController extends AbstractNutController {
 		this.nutAppController.showAddFutureWindow();
 	}
 	
+	public void showAddNoteWindow() {
+		this.nutAppController.showAddNoteWindow(this);
+	}
+	
 	public void showAddCategoryWindow() {
 		this.nutAppController.showAddCategoryWindow(this);
 	}

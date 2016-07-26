@@ -51,6 +51,11 @@ public class NutAppController implements INutController {
 				this.mainController);
 	}
 	
+	public void showAddNoteWindow(INutController parentController) {
+		INutController viewController = new NutNoteAddController(this, nutRemoteProxy);
+		showWindow(ResourcePathFinder.NOTE_ADD_VIEW, viewController, this.mainController);
+	}
+	
 	public void showAddCategoryWindow(INutController parentController) {
 		showAddCategoryWindow(parentController, null);
 	}

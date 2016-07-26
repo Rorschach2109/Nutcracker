@@ -62,7 +62,7 @@ public class NutMainView implements INutView {
 	
 	@FXML
 	private void handleAddNoteButtonReleased() {
-		
+		this.mainController.showAddNoteWindow();
 	}
 	
 	@FXML
