@@ -1,4 +1,4 @@
-package com.nutcracker.app.state;
+package com.nutcracker.app.state.controller.main;
 
 import com.nutcracker.app.controller.NutMainController;
 
