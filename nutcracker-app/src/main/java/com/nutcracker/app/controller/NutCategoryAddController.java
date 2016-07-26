@@ -46,6 +46,8 @@ public class NutCategoryAddController implements INutController {
 	public void insertCategory(NutCategory category) {
 		NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
 		nutSetter.insertCategory(nutAppController.getCurrentUserId(), category);
+		
+		nutAppController.updateMainView();
 	}
 	
 	public void closeStage() {

@@ -67,6 +67,8 @@ public class NutNoteDetailsController implements INutController {
 	public void createNewNote(NutNote note, int categoryId, int placeId) {
 		NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
 		nutSetter.insertNote(nutAppController.getCurrentUserId(), note, categoryId, placeId);
+		
+		nutAppController.updateMainView();
 	}
 	
 	public void showAddCategoryWindow() {

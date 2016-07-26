@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 public class NutMainView implements INutView {
 
 	private NutMainController mainController;
-		
+	
 	@FXML
 	private AnchorPane contentPane;
 	

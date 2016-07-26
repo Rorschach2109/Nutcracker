@@ -10,15 +10,18 @@ import javafx.stage.Stage;
 
 public class NutAppController implements INutController {
 
+	private int currentUserId;
+	private String currentUserLogin;
+	
 	private NutRemoteProxy nutRemoteProxy;
 	private StageManager stageManager;
 	
-	private int currentUserId;
-	private String currentUserLogin;
+	private final NutMainController mainController;
 
 	{
 		this.nutRemoteProxy = new NutRemoteProxy();
 		this.stageManager = new StageManager();
+		this.mainController = new NutMainController(this, this.nutRemoteProxy);
 	}
 	
 	public boolean initialize() {
@@ -41,9 +44,8 @@ public class NutAppController implements INutController {
 	public void enterMainWindow() {
 		this.stageManager.changeStage(ResourcePathFinder.MAIN_VIEW);
 		
-		NutMainController mainController = new NutMainController(this, nutRemoteProxy);
 		INutView view = this.stageManager.getCurrentView();
-		view.setController(mainController);
+		view.setController(this.mainController);
 	}
 	
 	public void showAddFutureWindow() {
@@ -66,6 +68,10 @@ public class NutAppController implements INutController {
 	
 	public INutView showNewStage(String sceneResourcePath) {
 		return this.stageManager.showNewStage(sceneResourcePath);
+	}
+	
+	public void updateMainView() {
+		this.mainController.updateLayoutList();
 	}
 	
 	public void close() {
