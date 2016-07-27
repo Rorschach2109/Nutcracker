@@ -41,7 +41,7 @@ public class NutNoteCell extends AbstractCell<NutNote> {
 	
 	public NutNoteCell() {
 		configureGrid();
-		configureLabelsPositions();
+		configureLabelsPosition();
 		configureHeaderLabels();
 	}
 	
@@ -69,7 +69,7 @@ public class NutNoteCell extends AbstractCell<NutNote> {
 		this.grid.setPadding(new Insets(3, 10, 3, 10));
 	}
 	
-	private void configureLabelsPositions() {
+	private void configureLabelsPosition() {
 		this.grid.add(this.iconLabel, 0, 0, 1, 3);
 		this.grid.add(this.deadlineLabel, 1, 0, 1, 3);
 		this.grid.add(this.titleHeaderLabel, 2, 0);
