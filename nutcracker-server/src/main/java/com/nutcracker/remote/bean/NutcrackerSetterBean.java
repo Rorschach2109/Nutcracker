@@ -51,6 +51,28 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 		this.entityManager.merge(currentUser);
 		return true;
 	}
+	
+	@Override
+	public boolean insertNote(int userId, NutNote note) {
+		NutUser currentUser = this.entityManager.find(NutUser.class, userId);
+		
+		if (null == currentUser) {
+			return false;
+		}
+		
+		note.setNoteOwner(currentUser);
+		
+		Set<NutNote> userNotes = currentUser.getUserNotes();
+		if (userNotes.contains(note)) {
+			return false;
+		}
+		
+		userNotes.add(note);
+		currentUser.setUserNotes(userNotes);
+		
+		this.entityManager.merge(currentUser);		
+		return true;
+	}
 
 	@Override
 	public boolean insertNote(int userId, NutNote note, int categoryId, int placeId) {

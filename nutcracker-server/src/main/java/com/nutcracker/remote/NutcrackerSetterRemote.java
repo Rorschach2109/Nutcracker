@@ -13,6 +13,7 @@ public interface NutcrackerSetterRemote {
 	public int insertUser(NutUser user);
 	
 	public boolean insertCategory(int userId, NutCategory category);
+	public boolean insertNote(int userId, NutNote note);
 	public boolean insertNote(int userId, NutNote note, int categoryId, int placeId);
 	public boolean insertPlace(int userId, NutPlace place);
 }
