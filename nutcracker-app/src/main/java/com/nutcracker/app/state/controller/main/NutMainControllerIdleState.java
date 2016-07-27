@@ -8,4 +8,9 @@ public class NutMainControllerIdleState implements INutMainControllerState {
 	public void updateLayoutList(NutMainController mainController) {
 		
 	}
+	
+	@Override
+	public <T> void layoutListDoubleClickHandler(NutMainController mainController, T object) {
+		
+	}
 }

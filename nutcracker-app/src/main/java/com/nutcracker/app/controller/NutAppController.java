@@ -4,6 +4,8 @@ import com.nutcracker.app.layout.StageManager;
 import com.nutcracker.app.util.NutRemoteProxy;
 import com.nutcracker.app.view.INutView;
 import com.nutcracker.app.view.ResourcePathFinder;
+import com.nutcracker.model.NutCategory;
+import com.nutcracker.model.NutNote;
 
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -64,6 +66,18 @@ public class NutAppController implements INutController {
 		INutController viewController = new NutCategoryAddController(this, nutRemoteProxy);
 		showWindow(ResourcePathFinder.CATEGORY_ADD_VIEW, viewController, 
 				parentController, parentStage);
+	}
+	
+	public void showNoteDetailsWindow(NutNote note, INutController parentController) {
+		
+	}
+	
+	public void showReminderDetailsWindow(NutNote note, INutController parentController) {
+		
+	}
+	
+	public void showCategoryDetailsWindow(NutCategory category, INutController parentController) {
+		
 	}
 	
 	public INutView showNewStage(String sceneResourcePath) {

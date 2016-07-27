@@ -12,4 +12,5 @@ public interface INutMainControllerState {
 	};
 	
 	public void updateLayoutList(NutMainController mainController);
+	public <T> void layoutListDoubleClickHandler(NutMainController mainController, T object);
 }

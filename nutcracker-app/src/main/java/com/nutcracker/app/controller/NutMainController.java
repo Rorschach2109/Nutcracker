@@ -22,8 +22,11 @@ import com.nutcracker.remote.NutcrackerFinderRemote;
 import com.nutcracker.remote.NutcrackerGetterRemote;
 
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class NutMainController extends AbstractNutController {
@@ -98,6 +101,18 @@ public class NutMainController extends AbstractNutController {
 		this.nutAppController.showAddCategoryWindow(this);
 	}
 	
+	public void showNoteDetailsWindow(NutNote note) {
+		this.nutAppController.showNoteDetailsWindow(note, this);
+	}
+	
+	public void showReminderDetailsWindow(NutNote note) {
+		this.nutAppController.showReminderDetailsWindow(note, this);
+	}
+	
+	public void showCategoryDetailsWindow(NutCategory category) {
+		this.nutAppController.showCategoryDetailsWindow(category, this);
+	}
+	
 	public void updateLayoutList() {
 		this.stateMap.get(this.currentState).updateLayoutList(this);
 	}
@@ -126,6 +141,7 @@ public class NutMainController extends AbstractNutController {
 	
 	private <T> void generateContent(List<T> contentList, Class<T> classType) {
 		ListView<T> layoutList = createLayoutList(contentList, classType);
+		addLayoutListMouseHandler(layoutList, this);
 		this.mainView.changeLayoutList(layoutList);
 	}
 
@@ -147,5 +163,19 @@ public class NutMainController extends AbstractNutController {
 		layoutList.setItems(FXCollections.observableArrayList(contentList));
 		
 		return layoutList;
+	}
+	
+	private <T> void addLayoutListMouseHandler(ListView<T> contentList, NutMainController mainController) {
+		contentList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+					if (mouseEvent.getClickCount() == 2) {
+						T object = contentList.getSelectionModel().getSelectedItem();
+						stateMap.get(currentState).layoutListDoubleClickHandler(mainController, object);
+					}
+				}
+			}
+		});
 	}
 }
