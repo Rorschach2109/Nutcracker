@@ -8,31 +8,28 @@ import com.nutcracker.model.NutNote;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class NutReminderAddView extends AbstractNutNoteDetailsView {
+public class NutNoteDetailsView extends AbstractNutNoteDetailsView {
 
 	@FXML
-	private Pane noteDetailsPane;
+	private Pane noteAddPane;
 	@FXML
 	private TextField titleField;
 	@FXML
-	private ChoiceBox<NutCategory> categoryChoiceBox;
-	@FXML
-	private DatePicker deadlinePicker;
+	private ComboBox<NutCategory> categoryChoiceBox;
 	@FXML
 	private CheckBox globalCheckBox;
 	@FXML
 	private TextArea messageField;
 	@FXML
 	private Label errorLabel;
-
+	
 	@Override
 	public void insertCategories(List<NutCategory> categories) {
 		this.categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
@@ -46,15 +43,14 @@ public class NutReminderAddView extends AbstractNutNoteDetailsView {
 
 	@Override
 	protected Stage getViewStage() {
-		return (Stage) this.noteDetailsPane.getScene().getWindow();
+		return (Stage) this.noteAddPane.getScene().getWindow();
 	}
 	
-	private NutNote createReminder() {
+	private NutNote createNote() {
 		NutNote note = new NutNote(
 				this.titleField.getText(),
 				this.messageField.getText(),
 				this.globalCheckBox.isSelected());
-		note.setNoteDeadline(this.deadlinePicker.getValue());
 		note.setNoteCategory(this.categoryChoiceBox.getValue());
 		
 		return note;
@@ -77,7 +73,7 @@ public class NutReminderAddView extends AbstractNutNoteDetailsView {
 	
 	@FXML
 	private void handleCreateButtonReleased() {
-		NutNote note = createReminder();
+		NutNote note = createNote();
 		this.noteDetailsController.handleConfirmButton(note);
 	}
 }

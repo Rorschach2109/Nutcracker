@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class NutCategoryAddView implements INutView {
+public class NutCategoryDetailsView implements INutView {
 
 	private NutCategoryAddController categoryAddController;
 	

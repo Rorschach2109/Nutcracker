@@ -49,13 +49,13 @@ public class NutAppController implements INutController {
 	
 	public void showAddFutureWindow() {
 		INutController viewController = new NutReminderAddController(this, nutRemoteProxy);
-		showWindow(ResourcePathFinder.REMINDER_ADD_VIEW, viewController, 
+		showWindow(ResourcePathFinder.REMINDER_DETAILS_VIEW, viewController, 
 				this.mainController);
 	}
 	
 	public void showAddNoteWindow(INutController parentController) {
 		INutController viewController = new NutNoteAddController(this, nutRemoteProxy);
-		showWindow(ResourcePathFinder.NOTE_ADD_VIEW, viewController, this.mainController);
+		showWindow(ResourcePathFinder.NOTE_DETAILS_VIEW, viewController, this.mainController);
 	}
 	
 	public void showAddCategoryWindow(INutController parentController) {
@@ -64,7 +64,7 @@ public class NutAppController implements INutController {
 	
 	public void showAddCategoryWindow(INutController parentController, Stage parentStage) {
 		INutController viewController = new NutCategoryAddController(this, nutRemoteProxy);
-		showWindow(ResourcePathFinder.CATEGORY_ADD_VIEW, viewController, 
+		showWindow(ResourcePathFinder.CATEGORY_DETAILS_VIEW, viewController, 
 				parentController, parentStage);
 	}
 	

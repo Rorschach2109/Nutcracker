@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane fx:id="noteAddPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nutcracker.app.view.NutNoteAddView">
+<Pane fx:id="noteAddPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nutcracker.app.view.NutNoteDetailsView">
    <children>
       <GridPane layoutX="14.0" layoutY="14.0" prefHeight="318.0" prefWidth="538.0">
         <columnConstraints>

@@ -5,7 +5,7 @@ import java.util.List;
 import com.nutcracker.app.util.NutRemoteProxy;
 import com.nutcracker.app.util.TextValidator;
 import com.nutcracker.app.view.INutView;
-import com.nutcracker.app.view.NutCategoryAddView;
+import com.nutcracker.app.view.NutCategoryDetailsView;
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.remote.NutcrackerGetterRemote;
 import com.nutcracker.remote.NutcrackerSetterRemote;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class NutCategoryAddController extends AbstractNutController {
 
-	private NutCategoryAddView categoryAddView;
+	private NutCategoryDetailsView categoryAddView;
 	
 	private Stage viewStage;
 	
@@ -52,7 +52,7 @@ public class NutCategoryAddController extends AbstractNutController {
 	
 	@Override
 	public void setView(INutView view) {
-		this.categoryAddView = (NutCategoryAddView) view;
+		this.categoryAddView = (NutCategoryDetailsView) view;
 	}
 
 	private boolean categoryExists(NutCategory category) {
