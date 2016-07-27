@@ -2,8 +2,6 @@ package com.nutcracker.app.view;
 
 import java.util.List;
 
-import com.nutcracker.app.controller.INutController;
-import com.nutcracker.app.controller.NutReminderAddController;
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
 
@@ -18,10 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class NutReminderAddView implements INutView {
+public class NutReminderAddView extends AbstractNutNoteDetailsView {
 
-	private NutReminderAddController noteDetailsController;
-	
 	@FXML
 	private Pane noteDetailsPane;
 	@FXML
@@ -37,21 +33,31 @@ public class NutReminderAddView implements INutView {
 	@FXML
 	private Label errorLabel;
 
+	@Override
 	public void insertCategories(List<NutCategory> categories) {
 		this.categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
 	}
 	
 	@Override
-	public void setController(INutController controller) {
-		this.noteDetailsController = (NutReminderAddController) controller;
-		this.noteDetailsController.setView(this);
-		this.noteDetailsController.initialize();
-		this.noteDetailsController.setStage((Stage) this.noteDetailsPane.getScene().getWindow());
-	}
-	
 	public void showErrorMessage(String errorMessage) {
 		this.errorLabel.setText(errorMessage);
 		this.errorLabel.setVisible(true);
+	}
+
+	@Override
+	protected Stage getViewStage() {
+		return (Stage) this.noteDetailsPane.getScene().getWindow();
+	}
+	
+	private NutNote createReminder() {
+		NutNote note = new NutNote(
+				this.titleField.getText(),
+				this.messageField.getText(),
+				this.globalCheckBox.isSelected());
+		note.setNoteDeadline(this.deadlinePicker.getValue());
+		note.setNoteCategory(this.categoryChoiceBox.getValue());
+		
+		return note;
 	}
 	
 	@FXML
@@ -71,21 +77,7 @@ public class NutReminderAddView implements INutView {
 	
 	@FXML
 	private void handleCreateButtonReleased() {
-		NutNote note = new NutNote(
-				this.titleField.getText(),
-				this.messageField.getText(),
-				this.globalCheckBox.isSelected());
-		note.setNoteDeadline(this.deadlinePicker.getValue());
-		note.setNoteCategory(this.categoryChoiceBox.getValue());
-		
-		if (false == this.noteDetailsController.validateNote(note)) {
-			return;
-		}
-		
-		int categoryId = note.getNoteCategory().getCategoryId();
-		int placeId = -1;
-		
-		this.noteDetailsController.createNewNote(note, categoryId, placeId);
-		this.noteDetailsController.closeStage();
+		NutNote note = createReminder();
+		this.noteDetailsController.handleConfirmButton(note);
 	}
 }
