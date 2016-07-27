@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class NutCategory implements java.io.Serializable, Comparable<NutCategory
 	
 	private String categoryName;
 	
-	@OneToMany(mappedBy="noteCategory", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="noteCategory", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private Set<NutNote> categoryNotes;
 
 	public NutCategory() {
