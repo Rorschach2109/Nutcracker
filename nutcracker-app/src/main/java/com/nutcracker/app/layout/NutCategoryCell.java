@@ -13,13 +13,17 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 
 	private final GridPane grid;
 	private final Label iconLabel;
+	
+	private final Label titleHeaderLabel;
 	private final Label titleLabel;
+	
 	private final Label countHeaderLabel;
 	private final Label countLabel;
 	
 	{
 		this.grid = new GridPane();
 		this.iconLabel = new Label();
+		this.titleHeaderLabel = new Label();
 		this.titleLabel = new Label();
 		this.countHeaderLabel = new Label();
 		this.countLabel = new Label();
@@ -48,12 +52,15 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 	
 	private void configureLabelsPosition() {
 		this.grid.add(this.iconLabel, 0, 0, 1, 2);
-		this.grid.add(this.titleLabel, 1, 0, 2, 1);
+		this.grid.add(this.titleHeaderLabel, 1, 0);
+		this.grid.add(this.titleLabel, 2, 0);
 		this.grid.add(this.countHeaderLabel, 1, 1);
 		this.grid.add(this.countLabel, 2, 1);
 	}
 	
 	private void configureHeaderLabels() {
+		this.titleHeaderLabel.setText("Category name:");
+		this.titleHeaderLabel.setFont(Font.font(null, FontWeight.BOLD, 12));
 		this.countHeaderLabel.setText("Notes count:");
 		this.countHeaderLabel.setFont(Font.font(null, FontWeight.BOLD, 12));
 	}
