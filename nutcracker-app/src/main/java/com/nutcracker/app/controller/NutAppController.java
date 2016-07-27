@@ -53,7 +53,7 @@ public class NutAppController implements INutController {
 				this.mainController);
 	}
 	
-	public void showAddNoteWindow(INutController parentController) {
+	public void showAddNoteWindow() {
 		INutController viewController = new NutNoteAddController(this, nutRemoteProxy);
 		showWindow(ResourcePathFinder.NOTE_DETAILS_VIEW, viewController, this.mainController);
 	}
@@ -68,16 +68,13 @@ public class NutAppController implements INutController {
 				parentController, parentStage);
 	}
 	
-	public void showNoteDetailsWindow(NutNote note, INutController parentController) {
-		
+	public void showNoteDetailsWindow(NutNote note) {
 	}
 	
-	public void showReminderDetailsWindow(NutNote note, INutController parentController) {
-		
+	public void showReminderDetailsWindow(NutNote note) {
 	}
 	
-	public void showCategoryDetailsWindow(NutCategory category, INutController parentController) {
-		
+	public void showCategoryDetailsWindow(NutCategory category) {
 	}
 	
 	public INutView showNewStage(String sceneResourcePath) {

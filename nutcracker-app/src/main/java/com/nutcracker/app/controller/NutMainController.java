@@ -94,7 +94,7 @@ public class NutMainController extends AbstractNutController {
 	}
 	
 	public void showAddNoteWindow() {
-		this.nutAppController.showAddNoteWindow(this);
+		this.nutAppController.showAddNoteWindow();
 	}
 	
 	public void showAddCategoryWindow() {
@@ -102,15 +102,15 @@ public class NutMainController extends AbstractNutController {
 	}
 	
 	public void showNoteDetailsWindow(NutNote note) {
-		this.nutAppController.showNoteDetailsWindow(note, this);
+		this.nutAppController.showNoteDetailsWindow(note);
 	}
 	
 	public void showReminderDetailsWindow(NutNote note) {
-		this.nutAppController.showReminderDetailsWindow(note, this);
+		this.nutAppController.showReminderDetailsWindow(note);
 	}
 	
 	public void showCategoryDetailsWindow(NutCategory category) {
-		this.nutAppController.showCategoryDetailsWindow(category, this);
+		this.nutAppController.showCategoryDetailsWindow(category);
 	}
 	
 	public void updateLayoutList() {
