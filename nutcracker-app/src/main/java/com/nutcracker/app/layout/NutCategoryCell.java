@@ -3,8 +3,10 @@ package com.nutcracker.app.layout;
 import com.nutcracker.model.NutCategory;
 
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -20,6 +22,8 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 	private final Label countHeaderLabel;
 	private final Label countLabel;
 	
+	private final Button editButton;
+	
 	{
 		this.grid = new GridPane();
 		this.iconLabel = new Label();
@@ -27,12 +31,14 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 		this.titleLabel = new Label();
 		this.countHeaderLabel = new Label();
 		this.countLabel = new Label();
+		this.editButton = new Button();
 	}
 	
 	public NutCategoryCell(double width, double height) {
 		configureGrid(width, height);
-		configureLabelsPosition();
+		configureComponentsPosition();
 		configureHeaderLabels();
+		configureButtons();
 	}
 	
 	@Override
@@ -45,17 +51,37 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 	}
 	
 	private void configureGrid(double width, double height) {
-		this.grid.setHgap(15);
+		this.grid.setHgap(10);
 		this.grid.setVgap(4);
-		this.grid.setPadding(new Insets(3, 10, 3, 10));
+		this.grid.setPadding(new Insets(1, 5, 1, 5));
+		this.grid.setMaxSize(width, height);
+		setColumnConstraints();
 	}
 	
-	private void configureLabelsPosition() {
+	private void setColumnConstraints() {
+		ColumnConstraints columnA = new ColumnConstraints();
+		columnA.setPercentWidth(8);
+
+		ColumnConstraints columnB = new ColumnConstraints();
+		columnB.setPercentWidth(20);
+		
+		ColumnConstraints columnC = new ColumnConstraints();
+		columnC.setPercentWidth(60);
+		
+		ColumnConstraints columnD = new ColumnConstraints();
+		columnD.setPercentWidth(10);
+		
+		this.grid.getColumnConstraints().addAll(columnA, columnB, 
+				columnC, columnD);
+	}
+	
+	private void configureComponentsPosition() {
 		this.grid.add(this.iconLabel, 0, 0, 1, 2);
 		this.grid.add(this.titleHeaderLabel, 1, 0);
 		this.grid.add(this.titleLabel, 2, 0);
 		this.grid.add(this.countHeaderLabel, 1, 1);
 		this.grid.add(this.countLabel, 2, 1);
+		this.grid.add(this.editButton, 3, 0, 1, 2);
 	}
 	
 	private void configureHeaderLabels() {
@@ -63,5 +89,9 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 		this.titleHeaderLabel.setFont(Font.font(null, FontWeight.BOLD, 12));
 		this.countHeaderLabel.setText("Notes count:");
 		this.countHeaderLabel.setFont(Font.font(null, FontWeight.BOLD, 12));
+	}
+	
+	private void configureButtons() {
+		this.editButton.setText("Edit");
 	}
 }
