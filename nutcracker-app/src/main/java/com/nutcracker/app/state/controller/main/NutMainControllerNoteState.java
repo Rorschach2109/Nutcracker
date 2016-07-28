@@ -11,7 +11,12 @@ public class NutMainControllerNoteState implements INutMainControllerState {
 	}
 
 	@Override
-	public <T> void layoutListDoubleClickHandler(NutMainController mainController, T object) {
+	public <T> void layoutListDetailsHandler(NutMainController mainController, T object) {
 		mainController.showNoteDetailsWindow((NutNote) object);
+	}
+	
+	@Override
+	public <T> void layoutListEditButtonHandler(NutMainController mainController, T object) {
+		mainController.showEditNoteWindow((NutNote) object);
 	}
 }

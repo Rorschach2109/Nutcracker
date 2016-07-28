@@ -14,16 +14,25 @@ import javafx.stage.Stage;
 
 public class NutCategoryAddController extends AbstractNutController {
 
+	private boolean editMode;
 	private NutCategoryDetailsView categoryAddView;
 	
 	private Stage viewStage;
 	
 	public NutCategoryAddController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
 		super(nutAppController, remoteProxy);
+		this.editMode = false;
 	}
 	
 	public void setStage(Stage viewStage) {
 		this.viewStage = viewStage;
+	}
+	
+	public void setContent(NutCategory category) {
+		if (null != category) {
+			this.categoryAddView.setContent(category);
+			this.editMode = true;
+		}
 	}
 	
 	public boolean validateCategory(NutCategory category) {
@@ -32,7 +41,7 @@ public class NutCategoryAddController extends AbstractNutController {
 			return false;
 		}
 		
-		if (true == categoryExists(category)) {
+		if (false == editMode && true == categoryExists(category)) {
 			this.categoryAddView.showErrorMessage("Category already exists");
 			return false;
 		}
@@ -40,10 +49,12 @@ public class NutCategoryAddController extends AbstractNutController {
 		return true;
 	}
 	
-	public void insertCategory(NutCategory category) {
-		NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
-		nutSetter.insertCategory(nutAppController.getCurrentUserId(), category);
-		notifyParent();
+	public void handleConfirmButton(NutCategory category) {
+		if (validateCategory(category)) {
+			confirmButtonAction(category);
+			notifyParent();
+			closeStage();
+		}
 	}
 	
 	public void closeStage() {
@@ -53,6 +64,15 @@ public class NutCategoryAddController extends AbstractNutController {
 	@Override
 	public void setView(INutView view) {
 		this.categoryAddView = (NutCategoryDetailsView) view;
+	}
+	
+	private void confirmButtonAction(NutCategory category) {
+		if (this.editMode) {
+			
+		} else {
+			NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
+			nutSetter.insertCategory(nutAppController.getCurrentUserId(), category);
+		}
 	}
 
 	private boolean categoryExists(NutCategory category) {

@@ -10,7 +10,12 @@ public class NutMainControllerIdleState implements INutMainControllerState {
 	}
 	
 	@Override
-	public <T> void layoutListDoubleClickHandler(NutMainController mainController, T object) {
+	public <T> void layoutListDetailsHandler(NutMainController mainController, T object) {
+		
+	}
+	
+	@Override
+	public <T> void layoutListEditButtonHandler(NutMainController mainController, T object) {
 		
 	}
 }

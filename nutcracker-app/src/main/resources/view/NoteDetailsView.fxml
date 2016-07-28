@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane fx:id="noteAddPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nutcracker.app.view.NutNoteDetailsView">
    <children>
       <GridPane layoutX="14.0" layoutY="14.0" prefHeight="318.0" prefWidth="538.0">
@@ -44,7 +43,7 @@
          </children>
       </GridPane>
       <Button layoutX="415.0" layoutY="338.0" mnemonicParsing="false" onMouseReleased="#handleCancelButtonReleased" text="Cancel" />
-      <Button layoutX="500.0" layoutY="338.0" mnemonicParsing="false" onMouseReleased="#handleCreateButtonReleased" text="Create" />
+      <Button layoutX="500.0" layoutY="338.0" mnemonicParsing="false" onMouseReleased="#handleConfirmButtonReleased" text="Confirm" />
       <Label fx:id="errorLabel" layoutX="14.0" layoutY="339.0" prefHeight="26.0" prefWidth="386.0" textFill="#e7160b">
          <font>
             <Font name="System Bold" size="10.0" />

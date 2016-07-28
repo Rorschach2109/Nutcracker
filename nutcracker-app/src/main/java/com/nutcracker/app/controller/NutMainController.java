@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.nutcracker.app.state.controller.main.INutMainControllerState;
 import com.nutcracker.app.state.controller.main.NutMainControllerCategoryState;
@@ -90,15 +91,27 @@ public class NutMainController extends AbstractNutController {
 	}
 	
 	public void showAddFutureWindow() {
-		this.nutAppController.showAddFutureWindow();
+		this.nutAppController.showAddFutureWindow(null);
+	}
+	
+	public void showEditReminderWindow(NutNote note) {
+		this.nutAppController.showAddFutureWindow(note);
 	}
 	
 	public void showAddNoteWindow() {
-		this.nutAppController.showAddNoteWindow();
+		this.nutAppController.showAddNoteWindow(null);
+	}
+	
+	public void showEditNoteWindow(NutNote note) {
+		this.nutAppController.showAddNoteWindow(note);
 	}
 	
 	public void showAddCategoryWindow() {
-		this.nutAppController.showAddCategoryWindow(this);
+		this.nutAppController.showAddCategoryWindow(this, null);
+	}
+	
+	public void showEditCategoryWindow(NutCategory category) {
+		this.nutAppController.showAddCategoryWindow(this, category);
 	}
 	
 	public void showNoteDetailsWindow(NutNote note) {
@@ -140,22 +153,25 @@ public class NutMainController extends AbstractNutController {
 	}
 	
 	private <T> void generateContent(List<T> contentList, Class<T> classType) {
-		ListView<T> layoutList = createLayoutList(contentList, classType);
+		ListView<T> layoutList = createLayoutList(contentList, classType, this);
 		addLayoutListMouseHandler(layoutList, this);
 		this.mainView.changeLayoutList(layoutList);
 	}
 
-	private <T> ListView<T> createLayoutList(List<T> contentList, Class<T> classType) {
+	private <T> ListView<T> createLayoutList(List<T> contentList, Class<T> classType, NutMainController mainController) {
 		ListView<T> layoutList = new ListView<>();
 		
 		layoutList.setCellFactory(new Callback<ListView<T>, ListCell<T>>() {
             @SuppressWarnings("unchecked")
 			@Override public ListCell<T> call(ListView<T> list) {
             	try {
+            		Consumer<T> editConsumer = object -> stateMap.get(currentState).layoutListEditButtonHandler(mainController, object);
             		return (ListCell<T>) Class
             				.forName(String.format(CELL_FACTORY_TEMPLATE, classType.getSimpleName()))
-            				.getDeclaredConstructor(double.class, double.class)
-            				.newInstance(mainView.getLayoutListWidth(), mainView.getLayoutListHeight());
+            				.getDeclaredConstructor(double.class, double.class, Consumer.class)
+            				.newInstance(mainView.getLayoutListWidth(), 
+            						mainView.getLayoutListHeight(),
+            						editConsumer);
             	} catch (Exception e) {
             		return null;
             	}
@@ -173,7 +189,7 @@ public class NutMainController extends AbstractNutController {
 				if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 					if (mouseEvent.getClickCount() == 2) {
 						T object = contentList.getSelectionModel().getSelectedItem();
-						stateMap.get(currentState).layoutListDoubleClickHandler(mainController, object);
+						stateMap.get(currentState).layoutListDetailsHandler(mainController, object);
 					}
 				}
 			}

@@ -5,6 +5,7 @@ import java.util.List;
 import com.nutcracker.app.controller.AbstractNutNoteDetailsController;
 import com.nutcracker.app.controller.INutController;
 import com.nutcracker.model.NutCategory;
+import com.nutcracker.model.NutNote;
 
 import javafx.stage.Stage;
 
@@ -12,6 +13,7 @@ public abstract class AbstractNutNoteDetailsView implements INutView {
 
 	protected AbstractNutNoteDetailsController noteDetailsController;
 	
+	public abstract void setContent(NutNote note);
 	public abstract void insertCategories(List<NutCategory> categories);
 	public abstract void showErrorMessage(String errorMessage);
 	protected abstract Stage getViewStage();

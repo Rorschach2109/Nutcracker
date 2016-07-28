@@ -30,6 +30,13 @@ public class NutNoteDetailsView extends AbstractNutNoteDetailsView {
 	@FXML
 	private Label errorLabel;
 	
+	public void setContent(NutNote note) {
+		this.titleField.setText(note.getNoteTitle());
+		this.categoryChoiceBox.setValue(note.getNoteCategory());
+		this.globalCheckBox.setSelected(note.isGlobalAvailable());
+		this.messageField.setText(note.getNoteMessage());
+	}
+	
 	@Override
 	public void insertCategories(List<NutCategory> categories) {
 		this.categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
@@ -72,7 +79,7 @@ public class NutNoteDetailsView extends AbstractNutNoteDetailsView {
 	}
 	
 	@FXML
-	private void handleCreateButtonReleased() {
+	private void handleConfirmButtonReleased() {
 		NutNote note = createNote();
 		this.noteDetailsController.handleConfirmButton(note);
 	}

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import com.nutcracker.app.util.NutRemoteProxy;
 import com.nutcracker.app.util.TextValidator;
 import com.nutcracker.model.NutNote;
-import com.nutcracker.remote.NutcrackerSetterRemote;
 
 public final class NutReminderAddController extends AbstractNutNoteDetailsController {
 
@@ -35,17 +34,11 @@ public final class NutReminderAddController extends AbstractNutNoteDetailsContro
 			return false;
 		}
 		
-		if (true == noteExists(note)) {
+		if (false == this.editMode && true == noteExists(note)) {
 			this.noteDetailsView.showErrorMessage("Note already exists");
 			return false;
 		}
 		
 		return true;
-	}
-	
-	@Override
-	protected final void confirmButtonAction(NutNote note) {
-		NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
-		nutSetter.insertNote(nutAppController.getCurrentUserId(), note);
 	}
 }

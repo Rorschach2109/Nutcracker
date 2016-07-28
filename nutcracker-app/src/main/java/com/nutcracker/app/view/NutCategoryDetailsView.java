@@ -26,6 +26,10 @@ public class NutCategoryDetailsView implements INutView {
 		this.errorLabel.setVisible(true);
 	}
 	
+	public void setContent(NutCategory category) {
+		this.categoryNameField.setText(category.getCategoryName());
+	}
+	
 	@Override
 	public void setController(INutController controller) {
 		this.categoryAddController = (NutCategoryAddController) controller;
@@ -39,14 +43,8 @@ public class NutCategoryDetailsView implements INutView {
 	}
 	
 	@FXML
-	private void handleCreateButtonReleased() {
+	private void handleConfirmButtonReleased() {
 		NutCategory category = new NutCategory(this.categoryNameField.getText());
-		
-		if (false == this.categoryAddController.validateCategory(category)) {
-			return;
-		}
-		
-		this.categoryAddController.insertCategory(category);
-		this.categoryAddController.closeStage();
+		this.categoryAddController.handleConfirmButton(category);
 	}
 }

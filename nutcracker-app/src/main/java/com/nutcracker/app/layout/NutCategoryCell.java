@@ -1,11 +1,15 @@
 package com.nutcracker.app.layout;
 
+import java.util.function.Consumer;
+
 import com.nutcracker.model.NutCategory;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -13,6 +17,8 @@ import javafx.scene.text.FontWeight;
 
 public class NutCategoryCell extends AbstractCell<NutCategory> {
 
+	private NutCategory category;
+	
 	private final GridPane grid;
 	private final Label iconLabel;
 	
@@ -34,15 +40,17 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 		this.editButton = new Button();
 	}
 	
-	public NutCategoryCell(double width, double height) {
+	public NutCategoryCell(double width, double height, Consumer<NutCategory> editButtonHandler) {
 		configureGrid(width, height);
 		configureComponentsPosition();
 		configureHeaderLabels();
-		configureButtons();
+		configureButtons(editButtonHandler);
 	}
 	
 	@Override
 	protected void addContent(NutCategory category) {
+		this.category = category;
+		
 		setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		
 		this.titleLabel.setText(category.getCategoryName());
@@ -91,7 +99,13 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 		this.countHeaderLabel.setFont(Font.font(null, FontWeight.BOLD, 12));
 	}
 	
-	private void configureButtons() {
+	private void configureButtons(Consumer<NutCategory> editButtonHandler) {
 		this.editButton.setText("Edit");
+		this.editButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				editButtonHandler.accept(category);
+			}
+		});
 	}
 }

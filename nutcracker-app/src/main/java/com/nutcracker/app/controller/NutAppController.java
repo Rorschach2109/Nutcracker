@@ -47,25 +47,28 @@ public class NutAppController implements INutController {
 		changeStage(ResourcePathFinder.MAIN_VIEW, this.mainController);
 	}
 	
-	public void showAddFutureWindow() {
-		INutController viewController = new NutReminderAddController(this, nutRemoteProxy);
+	public void showAddFutureWindow(NutNote note) {
+		NutReminderAddController viewController = new NutReminderAddController(this, nutRemoteProxy);
 		showWindow(ResourcePathFinder.REMINDER_DETAILS_VIEW, viewController, 
 				this.mainController);
+		viewController.setContent(note);
 	}
 	
-	public void showAddNoteWindow() {
-		INutController viewController = new NutNoteAddController(this, nutRemoteProxy);
+	public void showAddNoteWindow(NutNote note) {
+		NutNoteAddController viewController = new NutNoteAddController(this, nutRemoteProxy);
 		showWindow(ResourcePathFinder.NOTE_DETAILS_VIEW, viewController, this.mainController);
+		viewController.setContent(note);
 	}
 	
-	public void showAddCategoryWindow(INutController parentController) {
-		showAddCategoryWindow(parentController, null);
+	public void showAddCategoryWindow(INutController parentController, NutCategory category) {
+		showAddCategoryWindow(parentController, null, category);
 	}
 	
-	public void showAddCategoryWindow(INutController parentController, Stage parentStage) {
-		INutController viewController = new NutCategoryAddController(this, nutRemoteProxy);
+	public void showAddCategoryWindow(INutController parentController, Stage parentStage, NutCategory category) {
+		NutCategoryAddController viewController = new NutCategoryAddController(this, nutRemoteProxy);
 		showWindow(ResourcePathFinder.CATEGORY_DETAILS_VIEW, viewController, 
 				parentController, parentStage);
+		viewController.setContent(category);
 	}
 	
 	public void showNoteDetailsWindow(NutNote note) {

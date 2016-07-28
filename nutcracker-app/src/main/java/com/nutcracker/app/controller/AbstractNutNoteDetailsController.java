@@ -8,20 +8,30 @@ import com.nutcracker.app.view.INutView;
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
 import com.nutcracker.remote.NutcrackerGetterRemote;
+import com.nutcracker.remote.NutcrackerSetterRemote;
 
 import javafx.stage.Stage;
 
 public abstract class AbstractNutNoteDetailsController extends AbstractNutController {
 
+	protected boolean editMode;
 	protected AbstractNutNoteDetailsView noteDetailsView;
+	
 	private Stage viewStage;
 	
 	public AbstractNutNoteDetailsController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
 		super(nutAppController, remoteProxy);
+		this.editMode = false;
 	}
 	
 	protected abstract boolean validateNote(NutNote note);
-	protected abstract void confirmButtonAction(NutNote note);
+		
+	public void setContent(NutNote note) {
+		if (null != note) {
+			this.noteDetailsView.setContent(note);
+			this.editMode = true;
+		}
+	}
 	
 	public final void handleConfirmButton(NutNote note) {
 		if (validateNote(note)) {
@@ -40,7 +50,7 @@ public abstract class AbstractNutNoteDetailsController extends AbstractNutContro
 	}
 	
 	public void showAddCategoryWindow() {
-		nutAppController.showAddCategoryWindow(this, this.viewStage);
+		nutAppController.showAddCategoryWindow(this, this.viewStage, null);
 	}
 	
 	public void closeStage() {
@@ -71,5 +81,14 @@ public abstract class AbstractNutNoteDetailsController extends AbstractNutContro
 	private List<NutCategory> getCategories() {
 		NutcrackerGetterRemote nutGetter = remoteProxy.getNutGetter();
 		return nutGetter.getUserCategories(nutAppController.getCurrentUserId());
+	}
+	
+	private void confirmButtonAction(NutNote note) {
+		if (this.editMode) {
+			
+		} else {
+			NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
+			nutSetter.insertNote(nutAppController.getCurrentUserId(), note);
+		}
 	}
 }

@@ -32,7 +32,15 @@ public class NutReminderDetailsView extends AbstractNutNoteDetailsView {
 	private TextArea messageField;
 	@FXML
 	private Label errorLabel;
-
+	
+	public void setContent(NutNote note) {
+		this.titleField.setText(note.getNoteTitle());
+		this.categoryChoiceBox.setValue(note.getNoteCategory());
+		this.deadlinePicker.setValue(note.getNoteDeadline());
+		this.globalCheckBox.setSelected(note.isGlobalAvailable());
+		this.messageField.setText(note.getNoteMessage());
+	}
+	
 	@Override
 	public void insertCategories(List<NutCategory> categories) {
 		this.categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
@@ -76,7 +84,7 @@ public class NutReminderDetailsView extends AbstractNutNoteDetailsView {
 	}
 	
 	@FXML
-	private void handleCreateButtonReleased() {
+	private void handleConfirmButtonReleased() {
 		NutNote note = createReminder();
 		this.noteDetailsController.handleConfirmButton(note);
 	}
