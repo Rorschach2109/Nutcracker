@@ -154,7 +154,8 @@ public class NutMainController extends AbstractNutController {
             	try {
             		return (ListCell<T>) Class
             				.forName(String.format(CELL_FACTORY_TEMPLATE, classType.getSimpleName()))
-            				.newInstance();
+            				.getDeclaredConstructor(double.class, double.class)
+            				.newInstance(mainView.getLayoutListWidth(), mainView.getLayoutListHeight());
             	} catch (Exception e) {
             		return null;
             	}

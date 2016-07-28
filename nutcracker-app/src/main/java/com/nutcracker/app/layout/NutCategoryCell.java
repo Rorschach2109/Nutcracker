@@ -29,8 +29,8 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 		this.countLabel = new Label();
 	}
 	
-	public NutCategoryCell() {
-		configureGrid();
+	public NutCategoryCell(double width, double height) {
+		configureGrid(width, height);
 		configureLabelsPosition();
 		configureHeaderLabels();
 	}
@@ -44,7 +44,7 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 		setGraphic(this.grid);
 	}
 	
-	private void configureGrid() {
+	private void configureGrid(double width, double height) {
 		this.grid.setHgap(15);
 		this.grid.setVgap(4);
 		this.grid.setPadding(new Insets(3, 10, 3, 10));

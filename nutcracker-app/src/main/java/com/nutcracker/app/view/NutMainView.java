@@ -5,14 +5,22 @@ import com.nutcracker.app.controller.NutMainController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class NutMainView implements INutView {
 
 	private NutMainController mainController;
 	
 	@FXML
-	private AnchorPane contentPane;
+	private Pane contentPane;
+	
+	public double getLayoutListWidth() {
+		return this.contentPane.getWidth();
+	}
+	
+	public double getLayoutListHeight() {
+		return this.contentPane.getHeight();
+	}
 	
 	public <T> void changeLayoutList(ListView<T> layoutList) {
 		if (null == layoutList) {
@@ -21,6 +29,7 @@ public class NutMainView implements INutView {
 		
 		this.contentPane.getChildren().clear();
 		layoutList.setMinSize(this.contentPane.getWidth(), this.contentPane.getHeight());
+		layoutList.setMaxSize(this.contentPane.getWidth(), this.contentPane.getHeight());
 		this.contentPane.getChildren().add(layoutList);
 	}
 	
