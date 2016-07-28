@@ -39,6 +39,8 @@ public class NutcrackerSetterBean implements NutcrackerSetterRemote {
 		if (null == currentUser) {
 			return false;
 		}
+		
+		category.setCategoryOwner(currentUser);
 	
 		Set<NutCategory> userCategories = currentUser.getUserCategories();
 		if (userCategories.contains(category)) {

@@ -10,12 +10,23 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.nutcracker.model.query.NutCategoryNamedQuery;
+
 @Entity
 @Table(name="Category")
+@NamedQueries(
+		value={
+			@NamedQuery(name="categoryByNameAndUserId", 
+				query=NutCategoryNamedQuery.CATEGORY_BY_NAME_AND_USER_ID)
+		}
+	)
 public class NutCategory implements java.io.Serializable, Comparable<NutCategory> {
 
 	@Transient
@@ -30,6 +41,9 @@ public class NutCategory implements java.io.Serializable, Comparable<NutCategory
 	@OneToMany(mappedBy="noteCategory", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private Set<NutNote> categoryNotes;
 
+	@ManyToOne
+	private NutUser categoryOwner;
+	
 	public NutCategory() {
 	}
 
@@ -60,6 +74,14 @@ public class NutCategory implements java.io.Serializable, Comparable<NutCategory
 
 	public void setCategoryNotes(Set<NutNote> categoryNotes) {
 		this.categoryNotes = categoryNotes;
+	}
+
+	public NutUser getCategoryOwner() {
+		return categoryOwner;
+	}
+
+	public void setCategoryOwner(NutUser categoryOwner) {
+		this.categoryOwner = categoryOwner;
 	}
 
 	@Override
