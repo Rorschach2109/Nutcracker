@@ -18,7 +18,7 @@ import javafx.scene.text.FontWeight;
 
 public class NutNoteCell extends AbstractCell<NutNote> {
 	
-	private NutNote note;
+	private final Consumer<NutNote> editButtonHandler;
 	
 	private final GridPane grid;
 	private final Label iconLabel;
@@ -50,16 +50,15 @@ public class NutNoteCell extends AbstractCell<NutNote> {
 	}
 	
 	public NutNoteCell(double width, double height, Consumer<NutNote> editButtonHandler) {
+		this.editButtonHandler = editButtonHandler;
+		
 		configureGrid(width, height);
 		configureComponentsPosition();
 		configureHeaderLabels();
-		configureButtons(editButtonHandler);
 	}
 	
 	@Override
 	protected void addContent(NutNote note) {
-		this.note = note;
-		
 		setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		
 		this.titleLabel.setText(note.getNoteTitle());
@@ -72,6 +71,9 @@ public class NutNoteCell extends AbstractCell<NutNote> {
 			deadlineText = noteDeadline.toString();
 		}
 		this.deadlineLabel.setText(deadlineText);
+		
+		configureButtons(note);
+		
 		setGraphic(this.grid);
 	}
 	
@@ -124,7 +126,7 @@ public class NutNoteCell extends AbstractCell<NutNote> {
 		this.categoryHeaderLabel.setFont(Font.font(null, FontWeight.BOLD, 12));
 	}
 	
-	private void configureButtons(Consumer<NutNote> editButtonHandler) {
+	private void configureButtons(NutNote note) {
 		this.editButton.setText("Edit");
 		this.editButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override

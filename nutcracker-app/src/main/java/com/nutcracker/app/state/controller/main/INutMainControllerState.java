@@ -12,6 +12,6 @@ public interface INutMainControllerState {
 	};
 	
 	public void updateLayoutList(NutMainController mainController);
-	public <T> void layoutListDetailsHandler(NutMainController mainController, T object);
 	public <T> void layoutListEditButtonHandler(NutMainController mainController, T object);
+	public <T> void layoutListDetailsHandler(NutMainController mainController, T object);
 }

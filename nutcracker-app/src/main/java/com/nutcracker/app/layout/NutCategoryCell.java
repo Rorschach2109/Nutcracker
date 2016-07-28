@@ -17,7 +17,7 @@ import javafx.scene.text.FontWeight;
 
 public class NutCategoryCell extends AbstractCell<NutCategory> {
 
-	private NutCategory category;
+	private final Consumer<NutCategory> editButtonHandler;
 	
 	private final GridPane grid;
 	private final Label iconLabel;
@@ -41,20 +41,22 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 	}
 	
 	public NutCategoryCell(double width, double height, Consumer<NutCategory> editButtonHandler) {
+		this.editButtonHandler = editButtonHandler;
+		
 		configureGrid(width, height);
 		configureComponentsPosition();
 		configureHeaderLabels();
-		configureButtons(editButtonHandler);
 	}
 	
 	@Override
 	protected void addContent(NutCategory category) {
-		this.category = category;
-		
 		setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		
 		this.titleLabel.setText(category.getCategoryName());
 		this.countLabel.setText(Integer.toString(category.getCategoryNotes().size()));
+		
+		configureButtons(category);
+		
 		setGraphic(this.grid);
 	}
 	
@@ -99,7 +101,7 @@ public class NutCategoryCell extends AbstractCell<NutCategory> {
 		this.countHeaderLabel.setFont(Font.font(null, FontWeight.BOLD, 12));
 	}
 	
-	private void configureButtons(Consumer<NutCategory> editButtonHandler) {
+	private void configureButtons(NutCategory category) {
 		this.editButton.setText("Edit");
 		this.editButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override

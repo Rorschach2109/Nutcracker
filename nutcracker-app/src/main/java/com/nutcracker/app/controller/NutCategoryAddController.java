@@ -9,11 +9,13 @@ import com.nutcracker.app.view.NutCategoryDetailsView;
 import com.nutcracker.model.NutCategory;
 import com.nutcracker.remote.NutcrackerGetterRemote;
 import com.nutcracker.remote.NutcrackerSetterRemote;
+import com.nutcracker.remote.NutcrackerUpdaterRemote;
 
 import javafx.stage.Stage;
 
 public class NutCategoryAddController extends AbstractNutController {
 
+	private int currentCategoryId;
 	private boolean editMode;
 	private NutCategoryDetailsView categoryAddView;
 	
@@ -21,6 +23,7 @@ public class NutCategoryAddController extends AbstractNutController {
 	
 	public NutCategoryAddController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
 		super(nutAppController, remoteProxy);
+		this.currentCategoryId = 0;
 		this.editMode = false;
 	}
 	
@@ -31,6 +34,7 @@ public class NutCategoryAddController extends AbstractNutController {
 	public void setContent(NutCategory category) {
 		if (null != category) {
 			this.categoryAddView.setContent(category);
+			this.currentCategoryId = category.getCategoryId();
 			this.editMode = true;
 		}
 	}
@@ -68,7 +72,9 @@ public class NutCategoryAddController extends AbstractNutController {
 	
 	private void confirmButtonAction(NutCategory category) {
 		if (this.editMode) {
-			
+			category.setCategoryId(this.currentCategoryId);
+			NutcrackerUpdaterRemote nutUpdater = remoteProxy.getNutUpdater();
+			nutUpdater.updateCategory(nutAppController.getCurrentUserId(), category);
 		} else {
 			NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
 			nutSetter.insertCategory(nutAppController.getCurrentUserId(), category);

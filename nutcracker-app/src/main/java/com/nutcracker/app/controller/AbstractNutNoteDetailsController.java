@@ -9,6 +9,7 @@ import com.nutcracker.model.NutCategory;
 import com.nutcracker.model.NutNote;
 import com.nutcracker.remote.NutcrackerGetterRemote;
 import com.nutcracker.remote.NutcrackerSetterRemote;
+import com.nutcracker.remote.NutcrackerUpdaterRemote;
 
 import javafx.stage.Stage;
 
@@ -17,11 +18,13 @@ public abstract class AbstractNutNoteDetailsController extends AbstractNutContro
 	protected boolean editMode;
 	protected AbstractNutNoteDetailsView noteDetailsView;
 	
+	private int currentNoteId;
 	private Stage viewStage;
 	
 	public AbstractNutNoteDetailsController(NutAppController nutAppController, NutRemoteProxy remoteProxy) {
 		super(nutAppController, remoteProxy);
 		this.editMode = false;
+		this.currentNoteId = 0;
 	}
 	
 	protected abstract boolean validateNote(NutNote note);
@@ -30,6 +33,7 @@ public abstract class AbstractNutNoteDetailsController extends AbstractNutContro
 		if (null != note) {
 			this.noteDetailsView.setContent(note);
 			this.editMode = true;
+			this.currentNoteId = note.getNoteId();
 		}
 	}
 	
@@ -85,7 +89,9 @@ public abstract class AbstractNutNoteDetailsController extends AbstractNutContro
 	
 	private void confirmButtonAction(NutNote note) {
 		if (this.editMode) {
-			
+			note.setNoteId(this.currentNoteId);
+			NutcrackerUpdaterRemote nutUpdater = remoteProxy.getNutUpdater();
+			nutUpdater.updateNote(nutAppController.getCurrentUserId(), note);
 		} else {
 			NutcrackerSetterRemote nutSetter = remoteProxy.getNutSetter();
 			nutSetter.insertNote(nutAppController.getCurrentUserId(), note);
